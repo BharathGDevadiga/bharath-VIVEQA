@@ -13,7 +13,7 @@ wire NOR_G;
 wire XOR_G;
 wire XNOR_G;
 
-logic_gates uut (
+logic_gates dut (
     .A(A),
     .B(B),
     .AND_G(AND_G),
