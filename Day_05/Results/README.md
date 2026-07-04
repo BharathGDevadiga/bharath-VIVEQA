@@ -1,7 +1,9 @@
-Day 05 Results
-This folder contains:
+## Day 05 Results
 
-Waveform 
-RTL Schematic
-Device View
-Package View
+This folder contains:
+```text
+- Waveform
+- RTL Schematic
+- Device View
+- Package View
+```
