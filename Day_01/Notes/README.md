@@ -198,7 +198,7 @@ The output is HIGH only when both inputs match.
 
 ## Boolean Equations
 
-
+```text
 AND   : Y = A & B
 OR    : Y = A | B
 NOT   : Y = ~A
@@ -206,12 +206,12 @@ NAND  : Y = ~(A & B)
 NOR   : Y = ~(A | B)
 XOR   : Y = A ^ B
 XNOR  : Y = ~(A ^ B)
-
+```
 
 ---
 
 # Summary
-```text
+
 - AND → Output is 1 only if both inputs are 1.
 - OR → Output is 1 if at least one input is 1.
 - NOT → Reverses the input.
@@ -219,6 +219,5 @@ XNOR  : Y = ~(A ^ B)
 - NOR → Opposite of OR.
 - XOR → Output is 1 when inputs are different.
 - XNOR → Output is 1 when inputs are the same.
-```
-These logic gates are the foundation of digital electronics and are essential for learning Verilog and FPGA design.
 
+These logic gates are the foundation of digital electronics and are essential for learning Verilog and FPGA design.
