@@ -20,8 +20,7 @@ d_ff uut (
 // Clock Generation
 always #5 clk = ~clk;
 
-initial
-begin
+initial begin
     clk = 0;
     rst = 1;
     D = 0;
@@ -52,6 +51,11 @@ begin
     #10;
 
     $finish;
+end
+
+initial begin
+    $monitor("T=%0t clk=%b rst=%b D=%b Q=%b Qb=%b",
+             $time, clk, rst, D, Q, Qb);
 end
 
 endmodule
