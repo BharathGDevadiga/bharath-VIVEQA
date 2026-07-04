@@ -1,6 +1,10 @@
+`timescale 1ns / 1ps
+
 module logic_gates(
+    
     input A,
     input B,
+    
     output AND_G,
     output OR_G,
     output NOT_A,
