@@ -16,11 +16,15 @@ full_adder_using_two_half_adders dut(
 integer i;
 
 initial begin
+    
     for(i = 0; i < 8; i = i + 1) begin
         {a, b, cin} = i;
         #10;
+        
     end
+    
     $finish;
+    
 end
 
 endmodule
