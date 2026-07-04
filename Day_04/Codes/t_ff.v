@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 module t_ff(
+    
     input clk,
     input rst,
     input T,
@@ -10,12 +11,14 @@ module t_ff(
 
 always @(posedge clk or posedge rst)
 begin
+    
     if (rst)
         Q <= 1'b0;
     else if (T)
         Q <= ~Q;
     else
         Q <= Q;
+    
 end
 
 assign Qb = ~Q;
