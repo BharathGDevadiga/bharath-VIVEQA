@@ -60,10 +60,10 @@ A bell rings if **either one of two buttons** is pressed.
 # 3. NOT Gate
 
 The NOT gate reverses the input value.
-```text
+
 - Input 0 becomes Output 1.
 - Input 1 becomes Output 0.
-```
+
 ### Boolean Expression
 
 ```text
@@ -184,21 +184,21 @@ The output is HIGH only when both inputs match.
 ---
 
 # Applications of Logic Gates
-```text
+
 - Arithmetic circuits (Adders and Subtractors)
 - Memory devices
 - Processors
 - Digital control systems
 - FPGA and ASIC design
 - Embedded systems
-```
+
 ---
 
 ## Verilog Operators
 
 ## Boolean Equations
 
-```text
+
 AND   : Y = A & B
 OR    : Y = A | B
 NOT   : Y = ~A
@@ -206,12 +206,12 @@ NAND  : Y = ~(A & B)
 NOR   : Y = ~(A | B)
 XOR   : Y = A ^ B
 XNOR  : Y = ~(A ^ B)
-```
+
 
 ---
 
 # Summary
-```text
+
 - AND → Output is 1 only if both inputs are 1.
 - OR → Output is 1 if at least one input is 1.
 - NOT → Reverses the input.
@@ -221,4 +221,4 @@ XNOR  : Y = ~(A ^ B)
 - XNOR → Output is 1 when inputs are the same.
 
 These logic gates are the foundation of digital electronics and are essential for learning Verilog and FPGA design.
-```
+
