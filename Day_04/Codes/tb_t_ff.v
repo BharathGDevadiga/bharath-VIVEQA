@@ -21,6 +21,7 @@ t_ff uut (
 always #5 clk = ~clk;
 
 initial begin
+    
     clk = 0;
     rst = 1;
     T = 0;
@@ -54,12 +55,14 @@ initial begin
     #20;
 
     $finish;
+    
 end
 
 initial begin
     
     $monitor("Time=%0t clk=%b rst=%b T=%b Q=%b Qb=%b",
              $time, clk, rst, T, Q, Qb);
+    
 end
 
 endmodule
