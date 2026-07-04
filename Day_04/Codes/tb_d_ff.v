@@ -21,6 +21,7 @@ d_ff uut (
 always #5 clk = ~clk;
 
 initial begin
+    
     clk = 0;
     rst = 1;
     D = 0;
@@ -54,7 +55,8 @@ initial begin
 end
 
 initial begin
-    $monitor("T=%0t clk=%b rst=%b D=%b Q=%b Qb=%b",
+    
+    $monitor("Time=%0t clk=%b rst=%b D=%b Q=%b Qb=%b",
              $time, clk, rst, D, Q, Qb);
 end
 
