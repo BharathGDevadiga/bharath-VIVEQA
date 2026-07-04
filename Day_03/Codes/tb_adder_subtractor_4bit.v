@@ -41,12 +41,10 @@ initial begin
 
 end
 
-  initial begin
-
-    $display(" Time   m    A      B     Sum   Carry");
-    $monitor("%4t   %b   %b  %b   %b     %b",
-              $time, m, a, b, sum, carry);
-
-  end
+initial begin
+      
+    $monitor("Time=%0t m=%b A=%b B=%b Sum=%b Carry=%b",
+             $time, m, a, b, sum, carry);
+end
 
 endmodule
