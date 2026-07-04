@@ -1,32 +1,32 @@
 # Results
 
-This folder contains the implementation results of the **D, T, JK, and SR Flip-Flops** generated using Xilinx Vivado.
+This folder contains the implementation results of the **D, T, JK and SR Flip-Flops** generated using Xilinx Vivado.
 
 ## Files
 
 ### D Flip-Flop
-- D_FlipFlop_Waveform.png
-- D_FlipFlop_Schematic.png
-- D_FlipFlop_Device.png
-- D_FlipFlop_Package.png
+- D-ff_Waveform.png
+- D-ff_Schematic.png
+- D-ff_Device.png
+- D-ff_Package.png
 
 ### T Flip-Flop
-- T_FlipFlop_Waveform.png
-- T_FlipFlop_Schematic.png
-- T_FlipFlop_Device.png
-- T_FlipFlop_Package.png
+- T-ff_Waveform.png
+- T-ff_Schematic.png
+- T-ff_Device.png
+- T-ff_Package.png
 
 ### JK Flip-Flop
-- JK_FlipFlop_Waveform.png
-- JK_FlipFlop_Schematic.png
-- JK_FlipFlop_Device.png
-- JK_FlipFlop_Package.png
+- JK-ff_Waveform.png
+- JK-ff_Schematic.png
+- JK-ff_Device.png
+- JK-ff_Package.png
 
 ### SR Flip-Flop
-- SR_FlipFlop_Waveform.png
-- SR_FlipFlop_Schematic.png
-- SR_FlipFlop_Device.png
-- SR_FlipFlop_Package.png
+- SR-ff_Waveform.png
+- SR-ff_Schematic.png
+- SR-ff_Device.png
+- SR-ff_Package.png
 
 ## Description
 
