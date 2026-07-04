@@ -52,12 +52,14 @@ initial begin
     #10;
 
     $finish;
+    
 end
 
 initial begin
     
     $monitor("Time=%0t clk=%b rst=%b D=%b Q=%b Qb=%b",
              $time, clk, rst, D, Q, Qb);
+    
 end
 
 endmodule
