@@ -20,7 +20,6 @@ always @(*) begin
         4'b0111: {a,b,c,d,e,f,g,h} = 8'b11100000; // 7
         4'b1000: {a,b,c,d,e,f,g,h} = 8'b11111110; // 8
         4'b1001: {a,b,c,d,e,f,g,h} = 8'b11110110; // 9
-
         default:{a,b,c,d,e,f,g,h} = 8'b00000000;
 
     endcase
