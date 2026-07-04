@@ -1,7 +1,7 @@
 # Day 02 Results
 
 This folder contains:
-- Waveforms
+- Waveform
 - RTL Schematic
 - Device View
 - Package View
