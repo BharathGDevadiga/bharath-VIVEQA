@@ -1,7 +1,7 @@
 # Day 01 Results
 
 This folder contains:
-- Waveform screenshots
+- Waveform 
 - RTL Schematic
 - Device View
 - Package View
