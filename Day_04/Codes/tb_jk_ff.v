@@ -73,12 +73,14 @@ initial begin
     #10;
 
     $finish;
+    
 end
 
 initial begin
     
     $monitor("Time=%0t clk=%b rst=%b j=%b k=%b Q=%b Qb=%b",
               $time, clk, rst, j, k, Q, Qb);
+    
 end
 
 endmodule
