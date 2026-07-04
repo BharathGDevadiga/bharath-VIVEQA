@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 module half_adder(
+    
     input a,
     input b,
     output sum,
@@ -13,6 +14,7 @@ and(carry, a, b);
 endmodule
 
 module full_adder_using_two_half_adders(
+    
     input a,
     input b,
     input cin,
