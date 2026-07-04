@@ -57,7 +57,8 @@ initial begin
 end
 
 initial begin
-    $monitor("T=%0t clk=%b rst=%b T=%b Q=%b Qb=%b",
+    
+    $monitor("Time=%0t clk=%b rst=%b T=%b Q=%b Qb=%b",
              $time, clk, rst, T, Q, Qb);
 end
 
