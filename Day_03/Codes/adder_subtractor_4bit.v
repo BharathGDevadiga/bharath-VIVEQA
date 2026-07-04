@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 module half_adder(
+    
     input a,
     input b,
     output sum,
@@ -13,6 +14,7 @@ module half_adder(
 endmodule
 
 module full_adder(
+    
     input a,
     input b,
     input cin,
@@ -41,6 +43,7 @@ or(carry, carry1, carry2);
 endmodule
 
 module adder_subtractor_4bit(
+    
     input [3:0] a,
     input [3:0] b,
     input m,               // 0 = Add, 1 = Subtract
