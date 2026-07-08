@@ -6,4 +6,4 @@ This folder contains:
 - RTL Schematic
 - Device View
 - Package View
-- FPGA Kit Output
+- Hardware Implementation
