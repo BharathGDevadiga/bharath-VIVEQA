@@ -1,4 +1,4 @@
-Day 03 Results
+Day 06 Results
 
 This folder contains:
 
