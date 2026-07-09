@@ -1,0 +1,38 @@
+## LED Pins
+set_property PACKAGE_PIN D5  [get_ports {led[0]}]
+set_property PACKAGE_PIN A3  [get_ports {led[1]}]
+set_property PACKAGE_PIN B4  [get_ports {led[2]}]
+set_property PACKAGE_PIN A4  [get_ports {led[3]}]
+set_property PACKAGE_PIN E6  [get_ports {led[4]}]
+set_property PACKAGE_PIN C13 [get_ports {led[5]}]
+set_property PACKAGE_PIN C14 [get_ports {led[6]}]
+set_property PACKAGE_PIN D14 [get_ports {led[7]}]
+
+## Switch Pins
+set_property PACKAGE_PIN C9  [get_ports {switch[0]}]
+set_property PACKAGE_PIN B9  [get_ports {switch[1]}]
+set_property PACKAGE_PIN G5  [get_ports {switch[2]}]
+set_property PACKAGE_PIN A7  [get_ports {switch[3]}]
+set_property PACKAGE_PIN C7  [get_ports {switch[4]}]
+set_property PACKAGE_PIN A10 [get_ports {switch[5]}]
+set_property PACKAGE_PIN B7  [get_ports {switch[6]}]
+set_property PACKAGE_PIN A8  [get_ports {switch[7]}]
+
+## I/O Standard
+set_property IOSTANDARD LVCMOS33 [get_ports {led[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led[4]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led[5]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led[6]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {led[7]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {switch[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {switch[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {switch[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {switch[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {switch[4]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {switch[5]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {switch[6]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {switch[7]}]
