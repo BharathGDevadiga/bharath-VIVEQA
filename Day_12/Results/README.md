@@ -1,9 +1,10 @@
-## Day 09 Results
+## Day 12 Results
 
 This folder contains:
 
-- Waveform
-- RTL Schematic
-- Device View
-- Package View
-- Hardware Implementation
+* Simulation Waveform
+* RTL Schematic
+* Device View
+* Package View
+* Hardware Implementation (Correct Password)
+* Hardware Implementation (Incorrect Password)
