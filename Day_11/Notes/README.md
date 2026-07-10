@@ -1,4 +1,4 @@
-# Day 11 - Notes
+# Day 11 - Switch to LED Interface
 
 ## Introduction
 
