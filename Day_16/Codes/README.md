@@ -1,4 +1,4 @@
-# Day 17 - Verilog Codes
+# Day 16 - Sequence Detector (Mealy Machine)
 
 This folder contains the Verilog HDL programs for implementing a **Sequence Detector (Mealy Machine)** using **D Flip-Flops**.
 
