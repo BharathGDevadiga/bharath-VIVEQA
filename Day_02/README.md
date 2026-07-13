@@ -1,1 +1,1 @@
-Day 02 - Full Adder using Two Half Adders
+# Day 02 - Full Adder using Two Half Adders
