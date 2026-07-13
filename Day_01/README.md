@@ -1,1 +1,1 @@
-Day 01 - Logic Gates
+# Day 01 - Logic Gates
