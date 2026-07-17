@@ -1,4 +1,4 @@
-# Day 18 - Single Port RAM
+# Day 19 - Single Port RAM
 
 This folder contains the Verilog HDL programs for implementing a **Single Port RAM (Random Access Memory)**.
 
