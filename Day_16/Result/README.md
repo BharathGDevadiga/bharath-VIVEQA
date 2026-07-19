@@ -6,4 +6,3 @@ This folder contains:
 * RTL Schematic
 * Device View
 * Package View
-* Hardware Implementation
