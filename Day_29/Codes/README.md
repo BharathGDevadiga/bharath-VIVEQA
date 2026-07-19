@@ -1,17 +1,19 @@
 # Day 29 - Verilog Codes
 
-This folder contains the Verilog HDL programs for implementing a 4-bit Ring Counter using Verilog HDL on the FPGA board.
+This folder contains the Verilog HDL programs for implementing a 24-Hour Digital Clock using Verilog HDL on the FPGA board.
 
 ## Files
 
-- ring_counter.v
-- ring_counter_tb.v
-- ring_counter.xdc
+digital_clock.v
+
+digital_clock_tb.v
+
+digital_clock.xdc
 
 ## Description
 
-**ring_counter.v** contains the Verilog module for implementing a 4-bit Ring Counter. The design uses a shift register in which a single logic HIGH bit circulates through the four flip-flops. On every positive edge of the clock the HIGH bit shifts to the next position creating a continuous one-hot counting sequence.
+**digital_clock.v** contains the Verilog module for implementing a 24-Hour Digital Clock. The design generates a one-second pulse from the 24 MHz system clock and maintains seconds minutes and hours counters. The current time is converted into decimal digits and transmitted to the MAX7219 display driver through the SPI interface to display the time in HH:MM format.
 
-**ring_counter_tb.v** contains the testbench used to simulate and verify the Ring Counter. The simulation applies reset generates the system clock and observes the counter output. The waveform verifies that the HIGH bit rotates correctly through all four output bits.
+**digital_clock_tb.v** contains the testbench used to simulate and verify the Digital Clock. The simulation generates the 24 MHz input clock verifies the one-second pulse generation checks the seconds minutes and hours counters and confirms the correct SPI communication with the MAX7219 display.
 
-**ring_counter.xdc** contains the Xilinx Design Constraints (XDC) file that maps the system clock reset signal and counter outputs to the appropriate FPGA pins. It also specifies the LVCMOS33 I/O standard required for FPGA implementation.
+**digital_clock.xdc** contains the Xilinx Design Constraints (XDC) file that maps the 24 MHz system clock and the MAX7219 SPI interface signals including DIN CLK and LOAD to the appropriate FPGA pins. It also specifies the LVCMOS33 I/O standard required for FPGA implementation.
