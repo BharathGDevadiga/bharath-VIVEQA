@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project demonstrates the implementation of a **24-Hour Digital Clock** using **Verilog HDL**. The design generates a one-second timing pulse from the onboard **24 MHz system clock** counts seconds minutes and hours and displays the current time in **HH:MM** format on a **4-digit seven-segment display** using the **MAX7219** display driver.
+This project demonstrates the implementation of a **24-Hour Digital Clock** using **Verilog HDL**. The design generates a one-second timing pulse from the onboard 24 MHz system clock counts seconds minutes and hours and displays the current time in **HH:MM** format on a 4-digit seven-segment display using the MAX7219 display driver.
 
 This project introduces clock division sequential logic digital counters SPI communication and FPGA interfacing using Verilog HDL.
 
@@ -26,7 +26,7 @@ The design consists of
 
 ## One Second Clock Generation
 
-The FPGA uses a **24 MHz** system clock.
+The FPGA uses a 24 MHz system clock.
 
 A counter divides the input clock to generate a pulse every one second.
 
@@ -52,23 +52,23 @@ The generated pulse updates the digital clock once every second.
 
 ## Clock Counter Logic
 
-The design uses three counters
+The design uses three counters.
 
 - Seconds (00–59)
 - Minutes (00–59)
 - Hours (00–23)
 
-When the seconds counter reaches **59** it resets to zero and increments the minutes counter.
+When the seconds counter reaches 59 it resets to zero and increments the minutes counter.
 
-When the minutes counter reaches **59** it resets to zero and increments the hours counter.
+When the minutes counter reaches 59 it resets to zero and increments the hours counter.
 
-When the hours counter reaches **23** it rolls over to **00**.
+When the hours counter reaches 23 it rolls over to 00.
 
 ---
 
 ## Time Display
 
-The current time is displayed in **HH:MM** format.
+The current time is displayed in
 
 ```text
 HH : MM
@@ -92,7 +92,7 @@ Each digit is transmitted to the MAX7219 display driver through SPI.
 
 The MAX7219 communicates using the SPI interface.
 
-The SPI controller performs the following operations
+The SPI controller performs the following operations.
 
 - Initialize the MAX7219
 - Enable Decode Mode
@@ -105,20 +105,17 @@ The SPI controller performs the following operations
 ## Input and Output Ports
 
 ```verilog
-input  clk_24mhz;
+input clk_24mhz;
 
 output seg_cs;
 output seg_clk;
 output seg_din;
 ```
 
-**clk_24mhz** – 24 MHz FPGA system clock
-
-**seg_cs** – MAX7219 Chip Select (LOAD)
-
-**seg_clk** – SPI Clock
-
-**seg_din** – SPI Data Input
+- **clk_24mhz** – 24 MHz FPGA system clock
+- **seg_cs** – MAX7219 Chip Select
+- **seg_clk** – SPI Clock
+- **seg_din** – SPI Data Input
 
 ---
 
@@ -158,15 +155,12 @@ The operation depends on
 
 Typical FPGA connections
 
-24 MHz Clock → `clk_24mhz`
+- 24 MHz Clock → clk_24mhz
+- MAX7219 DIN → seg_din
+- MAX7219 CLK → seg_clk
+- MAX7219 LOAD → seg_cs
 
-MAX7219 DIN → `seg_din`
-
-MAX7219 CLK → `seg_clk`
-
-MAX7219 LOAD → `seg_cs`
-
-The MAX7219 drives the onboard four-digit seven-segment display and continuously displays the current time.
+The MAX7219 continuously displays the current time in HH:MM format.
 
 ---
 
@@ -182,14 +176,14 @@ The testbench verifies
 - SPI Communication
 - Continuous Time Update
 
-The simulation confirms that the digital clock operates correctly and continuously updates the display.
+The simulation confirms that the digital clock operates correctly.
 
 ---
 
 ## Applications
 
 - Digital Clocks
-- FPGA-Based Timekeeping
+- FPGA Timekeeping
 - Embedded Systems
 - Industrial Timers
 - Digital Displays
@@ -201,29 +195,9 @@ The simulation confirms that the digital clock operates correctly and continuous
 
 - Learned the working principle of a 24-hour Digital Clock.
 - Implemented a Digital Clock using Verilog HDL.
-- Generated a one-second timing pulse from a 24 MHz system clock.
+- Generated a one-second timing pulse from a 24 MHz clock.
 - Implemented hours minutes and seconds counters.
-- Interfaced the FPGA with the MAX7219 display driver using SPI.
-- Displayed time in HH:MM format on a four-digit seven-segment display.
-- Verified the design using a simulation testbench.
-- Tested the design on an FPGA using the onboard MAX7219 display.
-
----
-
-# Day 29 - Verilog Codes
-
-This folder contains the Verilog HDL programs for implementing a **24-Hour Digital Clock** using Verilog HDL on the FPGA board.
-
-## Files
-
-- `digital_clock.v`
-- `digital_clock_tb.v`
-- `digital_clock.xdc`
-
-## Description
-
-**digital_clock.v** contains the Verilog module for implementing a 24-hour Digital Clock. It generates a one-second timing pulse from the 24 MHz system clock maintains seconds minutes and hours counters converts the values into decimal digits and communicates with the MAX7219 display driver through SPI to display the current time in HH:MM format.
-
-**digital_clock_tb.v** contains the simulation testbench used to verify the Digital Clock. The testbench generates the 24 MHz input clock simulates the one-second timer verifies the counters and observes the SPI communication used to update the display.
-
-**digital_clock.xdc** contains the Xilinx Design Constraints (XDC) file that maps the 24 MHz system clock and the MAX7219 SPI interface signals (**DIN** **CLK** and **LOAD/CS**) to the appropriate FPGA pins. It also specifies the **LVCMOS33** I/O standard required for FPGA implementation.
+- Interfaced the FPGA with the MAX7219 using SPI.
+- Displayed time in HH:MM format.
+- Verified the design using simulation.
+- Tested the design on the FPGA.
