@@ -47,19 +47,19 @@ The generated LFSR output is converted into a valid dice value ranging from 1 to
 ## Input and Output Ports
 
 ```verilog
-input clk;
+input clk_24mhz;
 input rst;
 input roll;
 
 output reg [6:0] seg;
-output reg [3:0] an;
+output [3:0] an;
 ```
 
 ## Port Description
 
 | Port | Description |
 |------|-------------|
-| clk | 24 MHz System Clock |
+| clk_24mhz | 24 MHz System Clock |
 | rst | Reset signal used to initialize the LFSR |
 | roll | Push button input used for rolling the dice |
 | seg | Seven segment display output |
@@ -88,20 +88,17 @@ When the reset button is activated:
 
 ## Dice Value Generation
 
-The lower bits of the LFSR output are mapped to a value between 1 and 6 using modulo operation.
+The current LFSR value is converted into a dice value between **1 and 6** using the modulo (`%`) operation.
 
-The output value is restricted between **1 and 6**.
+The dice value is calculated using:
 
-| LFSR Generated Value | Dice Output |
-|----------------------|-------------|
-| 0 | 1 |
-| 1 | 2 |
-| 2 | 3 |
-| 3 | 4 |
-| 4 | 5 |
-| 5 | 6 |
+```verilog
+dice_value <= (lfsr % 6) + 1;
+```
 
-The generated dice number is then passed to the seven-segment decoder.
+This ensures that the generated dice value is always between **1** and **6**.
+
+The generated dice value is then passed to the seven-segment decoder for display.
 
 ## Seven Segment Display
 
@@ -146,11 +143,11 @@ Typical FPGA connections:
 
 | FPGA Component | Signal |
 |----------------|--------|
-| 24 MHz Clock | clk |
-| Push Button | roll |
+| 24 MHz Clock | clk_24mhz |
 | Reset Button | rst |
-| Seven Segment Pins | seg |
-| Digit Enable Pins | an |
+| Roll Input | roll |
+| Seven-Segment Display | seg |
+| Digit Enable | an |
 
 The push button is used to roll the dice while the seven-segment display shows the generated random dice value.
 
@@ -163,11 +160,12 @@ The testbench verifies the following operations:
 - Clock generation
 - Reset operation
 - LFSR random sequence generation
-- Dice value conversion
+- Dice value generation
 - Roll button operation
+- Seven-segment decoder
 - Seven-segment display output
 
-The simulation confirms that the Digital Dice Game correctly generates pseudo-random dice values and displays the output on the seven-segment display.
+The simulation confirms that the Digital Dice Game correctly generates pseudo-random dice values and displays the corresponding output on the seven-segment display.
 
 ---
 
