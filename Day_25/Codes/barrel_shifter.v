@@ -3,7 +3,7 @@
 module barrel_shifter(
     input  [7:0] data_in,
     input  [2:0] shift_amt,
-    input        dir,
+    input dir,
     output reg [7:0] data_out
 );
 
