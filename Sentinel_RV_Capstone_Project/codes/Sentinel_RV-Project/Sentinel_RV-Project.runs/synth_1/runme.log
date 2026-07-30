@@ -1,0 +1,18 @@
+
+*** Running vivado
+    with args -log sentinel_rv_board_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source sentinel_rv_board_top.tcl
+
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Thu Jul 30 14:40:43 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source sentinel_rv_board_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:16 ; elapsed = 00:00:14 . Memory (MB): peak = 530.457 ; gain = 219.441
+ERROR: [Common 17-69] Command failed: File 'C:/VIVADO-proj1/New folder/src/integration/peripheral_top.v' does not exist
+INFO: [Common 17-206] Exiting Vivado at Thu Jul 30 14:41:07 2026...
