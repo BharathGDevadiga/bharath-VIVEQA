@@ -1,0 +1,810 @@
+
+*** Running vivado
+    with args -log sentinel_rv_board_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source sentinel_rv_board_top.tcl
+
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Thu Jul 30 15:39:45 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source sentinel_rv_board_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:14 ; elapsed = 00:00:11 . Memory (MB): peak = 530.152 ; gain = 220.266
+Command: synth_design -top sentinel_rv_board_top -part xc7a35tftg256-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tftg256-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 30544
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:13 . Memory (MB): peak = 1259.727 ; gain = 541.953
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'sentinel_rv_board_top' [C:/VIVADO-proj1/New folder/src/sentinel_rv_board_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'sentinel_rv_top' [C:/VIVADO-proj1/New folder/src/sentinel_rv_top.v:5]
+	Parameter AUDIT_KEY bound to: 128'b00000000000000010000001000000011000001000000010100000110000001110000100000001001000010100000101100001100000011010000111000001111 
+	Parameter SD_DETECT_ACTIVE_LOW bound to: 1 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'security_telemetry' [C:/VIVADO-proj1/New folder/src/integration/security_telemetry.v:6]
+INFO: [Synth 8-6157] synthesizing module 'aes128_encrypt' [C:/VIVADO-proj1/New folder/src/aes/aes128_encrypt.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'aes128_encrypt' (0#1) [C:/VIVADO-proj1/New folder/src/aes/aes128_encrypt.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'security_telemetry' (0#1) [C:/VIVADO-proj1/New folder/src/integration/security_telemetry.v:6]
+INFO: [Synth 8-6157] synthesizing module 'security_command_bridge' [C:/VIVADO-proj1/New folder/src/integration/security_command_bridge.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'security_command_bridge' (0#1) [C:/VIVADO-proj1/New folder/src/integration/security_command_bridge.v:6]
+INFO: [Synth 8-6157] synthesizing module 'peripheral_top' [C:/VIVADO-proj1/New folder/src/integration/peripheral_top.v:3]
+	Parameter SD_DETECT_ACTIVE_LOW bound to: 1 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'uart_top' [C:/VIVADO-proj1/New folder/src/uart/uart_top.v:3]
+	Parameter CLK_HZ bound to: 24000000 - type: integer 
+	Parameter BAUD bound to: 115200 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'baud_gen' [C:/VIVADO-proj1/New folder/src/uart/baud_gen.v:3]
+	Parameter CLK_HZ bound to: 24000000 - type: integer 
+	Parameter BAUD bound to: 115200 - type: integer 
+	Parameter OVERSAMPLE bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'baud_gen' (0#1) [C:/VIVADO-proj1/New folder/src/uart/baud_gen.v:3]
+INFO: [Synth 8-6157] synthesizing module 'uart_tx' [C:/VIVADO-proj1/New folder/src/uart/uart_tx.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (0#1) [C:/VIVADO-proj1/New folder/src/uart/uart_tx.v:3]
+INFO: [Synth 8-6157] synthesizing module 'uart_rx' [C:/VIVADO-proj1/New folder/src/uart/uart_rx.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (0#1) [C:/VIVADO-proj1/New folder/src/uart/uart_rx.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'uart_top' (0#1) [C:/VIVADO-proj1/New folder/src/uart/uart_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'sentinel_command_rx' [C:/VIVADO-proj1/New folder/src/uart/sentinel_command_rx.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'sentinel_command_rx' (0#1) [C:/VIVADO-proj1/New folder/src/uart/sentinel_command_rx.v:3]
+INFO: [Synth 8-6157] synthesizing module 'sentinel_telemetry_tx' [C:/VIVADO-proj1/New folder/src/uart/sentinel_telemetry_tx.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'sentinel_telemetry_tx' (0#1) [C:/VIVADO-proj1/New folder/src/uart/sentinel_telemetry_tx.v:3]
+INFO: [Synth 8-6157] synthesizing module 'peripheral_controller' [C:/VIVADO-proj1/New folder/src/integration/peripheral_controller.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'peripheral_controller' (0#1) [C:/VIVADO-proj1/New folder/src/integration/peripheral_controller.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mcp3202_sampler' [C:/VIVADO-proj1/New folder/src/adc/mcp3202_sampler.v:3]
+	Parameter CLK_HZ bound to: 24000000 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'spi_master' [C:/VIVADO-proj1/New folder/src/adc/spi_master.v:3]
+	Parameter CLK_HZ bound to: 24000000 - type: integer 
+	Parameter SPI_HZ bound to: 1000000 - type: integer 
+	Parameter DATA_WIDTH bound to: 24 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'spi_master' (0#1) [C:/VIVADO-proj1/New folder/src/adc/spi_master.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'mcp3202_sampler' (0#1) [C:/VIVADO-proj1/New folder/src/adc/mcp3202_sampler.v:3]
+INFO: [Synth 8-6157] synthesizing module 'dht11_controller' [C:/VIVADO-proj1/New folder/src/integration/dht11_controller.v:3]
+	Parameter CLK_HZ bound to: 24000000 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'dht11_controller' (0#1) [C:/VIVADO-proj1/New folder/src/integration/dht11_controller.v:3]
+INFO: [Synth 8-6157] synthesizing module 'hc_sr04_controller' [C:/VIVADO-proj1/New folder/src/integration/hc_sr04_controller.v:3]
+	Parameter CLK_HZ bound to: 24000000 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'hc_sr04_controller' (0#1) [C:/VIVADO-proj1/New folder/src/integration/hc_sr04_controller.v:3]
+INFO: [Synth 8-6157] synthesizing module 'lcd_controller' [C:/VIVADO-proj1/New folder/src/lcd/lcd_controller.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'lcd_controller' (0#1) [C:/VIVADO-proj1/New folder/src/lcd/lcd_controller.v:3]
+INFO: [Synth 8-6157] synthesizing module 'lcd_driver' [C:/VIVADO-proj1/New folder/src/lcd/lcd_driver.v:3]
+	Parameter CLK_HZ bound to: 24000000 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'lcd_driver' (0#1) [C:/VIVADO-proj1/New folder/src/lcd/lcd_driver.v:3]
+INFO: [Synth 8-6157] synthesizing module 'keypad_scan' [C:/VIVADO-proj1/New folder/src/keypad/keypad_scan.v:3]
+	Parameter CLK_HZ bound to: 24000000 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'keypad_scan' (0#1) [C:/VIVADO-proj1/New folder/src/keypad/keypad_scan.v:3]
+INFO: [Synth 8-6157] synthesizing module 'keypad_decoder' [C:/VIVADO-proj1/New folder/src/keypad/keypad_decoder.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'keypad_decoder' (0#1) [C:/VIVADO-proj1/New folder/src/keypad/keypad_decoder.v:3]
+INFO: [Synth 8-6157] synthesizing module 'led_controller' [C:/VIVADO-proj1/New folder/src/display/led_controller.v:3]
+	Parameter CLK_HZ bound to: 24000000 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'led_controller' (0#1) [C:/VIVADO-proj1/New folder/src/display/led_controller.v:3]
+INFO: [Synth 8-6157] synthesizing module 'buzzer_controller' [C:/VIVADO-proj1/New folder/src/display/buzzer_controller.v:3]
+	Parameter CLK_HZ bound to: 24000000 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'buzzer_controller' (0#1) [C:/VIVADO-proj1/New folder/src/display/buzzer_controller.v:3]
+INFO: [Synth 8-6157] synthesizing module 'sevenseg_driver' [C:/VIVADO-proj1/New folder/src/display/sevenseg_driver.v:3]
+	Parameter CLK_HZ bound to: 24000000 - type: integer 
+INFO: [Synth 8-155] case statement is not full and has no default [C:/VIVADO-proj1/New folder/src/display/sevenseg_driver.v:66]
+INFO: [Synth 8-6155] done synthesizing module 'sevenseg_driver' (0#1) [C:/VIVADO-proj1/New folder/src/display/sevenseg_driver.v:3]
+INFO: [Synth 8-6157] synthesizing module 'relay_driver' [C:/VIVADO-proj1/New folder/src/actuator/relay_driver.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'relay_driver' (0#1) [C:/VIVADO-proj1/New folder/src/actuator/relay_driver.v:3]
+INFO: [Synth 8-6157] synthesizing module 'audit_log_writer' [C:/VIVADO-proj1/New folder/src/sdcard/audit_log_writer.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'audit_log_writer' (0#1) [C:/VIVADO-proj1/New folder/src/sdcard/audit_log_writer.v:6]
+INFO: [Synth 8-6157] synthesizing module 'sd_logger' [C:/VIVADO-proj1/New folder/src/sdcard/sd_logger.v:3]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/VIVADO-proj1/New folder/src/sdcard/sd_logger.v:42]
+INFO: [Synth 8-6155] done synthesizing module 'sd_logger' (0#1) [C:/VIVADO-proj1/New folder/src/sdcard/sd_logger.v:3]
+INFO: [Synth 8-6157] synthesizing module 'sd_sector_writer' [C:/VIVADO-proj1/New folder/src/sdcard/sd_sector_writer.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'sd_sector_writer' (0#1) [C:/VIVADO-proj1/New folder/src/sdcard/sd_sector_writer.v:6]
+INFO: [Synth 8-6157] synthesizing module 'sd_card_init' [C:/VIVADO-proj1/New folder/src/sdcard/sd_card_init.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'sd_card_init' (0#1) [C:/VIVADO-proj1/New folder/src/sdcard/sd_card_init.v:6]
+INFO: [Synth 8-6157] synthesizing module 'spi_sd_master' [C:/VIVADO-proj1/New folder/src/sdcard/spi_sd_master.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'spi_sd_master' (0#1) [C:/VIVADO-proj1/New folder/src/sdcard/spi_sd_master.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'peripheral_top' (0#1) [C:/VIVADO-proj1/New folder/src/integration/peripheral_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'sentinel_rv_security' [C:/VIVADO-proj1/New folder/src/sentinel_rv_security.v:3]
+INFO: [Synth 8-6157] synthesizing module 'xadc_monitor' [C:/VIVADO-proj1/New folder/src/xadc/xadc_monitor.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'xadc_monitor' (0#1) [C:/VIVADO-proj1/New folder/src/xadc/xadc_monitor.v:5]
+INFO: [Synth 8-6157] synthesizing module 'replay_protection' [C:/VIVADO-proj1/New folder/src/security/replay_protection.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'replay_protection' (0#1) [C:/VIVADO-proj1/New folder/src/security/replay_protection.v:5]
+INFO: [Synth 8-6157] synthesizing module 'security_controller' [C:/VIVADO-proj1/New folder/src/security/security_controller.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'security_controller' (0#1) [C:/VIVADO-proj1/New folder/src/security/security_controller.v:3]
+INFO: [Synth 8-6157] synthesizing module 'packet_formatter' [C:/VIVADO-proj1/New folder/src/packet/packet_formatter.v:4]
+INFO: [Synth 8-6157] synthesizing module 'crc32_mpeg2' [C:/VIVADO-proj1/New folder/src/crc/crc32_mpeg2.v:3]
+INFO: [Synth 8-6157] synthesizing module 'crc_stream' [C:/VIVADO-proj1/New folder/src/crc/crc_stream.v:3]
+	Parameter WIDTH bound to: 32 - type: integer 
+	Parameter POLY bound to: 79764919 - type: integer 
+	Parameter INIT bound to: 32'b11111111111111111111111111111111 
+INFO: [Synth 8-6155] done synthesizing module 'crc_stream' (0#1) [C:/VIVADO-proj1/New folder/src/crc/crc_stream.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'crc32_mpeg2' (0#1) [C:/VIVADO-proj1/New folder/src/crc/crc32_mpeg2.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'packet_formatter' (0#1) [C:/VIVADO-proj1/New folder/src/packet/packet_formatter.v:4]
+INFO: [Synth 8-6157] synthesizing module 'nonce_generator' [C:/VIVADO-proj1/New folder/src/security/nonce_generator.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'nonce_generator' (0#1) [C:/VIVADO-proj1/New folder/src/security/nonce_generator.v:3]
+INFO: [Synth 8-6157] synthesizing module 'picorv32_wrapper' [C:/VIVADO-proj1/New folder/src/cpu/picorv32_wrapper.v:3]
+INFO: [Synth 8-6157] synthesizing module 'picorv32' [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:62]
+	Parameter ENABLE_MUL bound to: 1'b1 
+	Parameter ENABLE_DIV bound to: 1'b1 
+	Parameter ENABLE_IRQ bound to: 1'b0 
+	Parameter PROGADDR_RESET bound to: 0 - type: integer 
+	Parameter STACKADDR bound to: 4092 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'picorv32_pcpi_mul' [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:2197]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:2228]
+INFO: [Synth 8-6155] done synthesizing module 'picorv32_pcpi_mul' (0#1) [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:2197]
+INFO: [Synth 8-6157] synthesizing module 'picorv32_pcpi_div' [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:2420]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:2445]
+INFO: [Synth 8-6155] done synthesizing module 'picorv32_pcpi_div' (0#1) [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:2420]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:331]
+WARNING: [Synth 8-151] case item 1'b0 is unreachable [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1268]
+WARNING: [Synth 8-151] case item 1'b0 is unreachable [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1314]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1314]
+WARNING: [Synth 8-151] case item 1'b0 is unreachable [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1497]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1497]
+WARNING: [Synth 8-151] case item 1'b0 is unreachable [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1583]
+WARNING: [Synth 8-151] case item 1'b0 is unreachable [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1583]
+WARNING: [Synth 8-151] case item 1'b0 is unreachable [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1583]
+WARNING: [Synth 8-151] case item 1'b0 is unreachable [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1583]
+WARNING: [Synth 8-151] case item 1'b0 is unreachable [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1583]
+INFO: [Synth 8-6155] done synthesizing module 'picorv32' (0#1) [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:62]
+INFO: [Synth 8-6155] done synthesizing module 'picorv32_wrapper' (0#1) [C:/VIVADO-proj1/New folder/src/cpu/picorv32_wrapper.v:3]
+INFO: [Synth 8-6157] synthesizing module 'cpu_mmio_bridge' [C:/VIVADO-proj1/New folder/src/cpu/cpu_mmio_bridge.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_mmio_bridge' (0#1) [C:/VIVADO-proj1/New folder/src/cpu/cpu_mmio_bridge.v:3]
+INFO: [Synth 8-6157] synthesizing module 'simple_bram_memory' [C:/VIVADO-proj1/New folder/src/cpu/simple_bram_memory.v:3]
+INFO: [Synth 8-3876] $readmem data file 'cpu_test_program.hex' is read successfully [C:/VIVADO-proj1/New folder/src/cpu/simple_bram_memory.v:21]
+INFO: [Synth 8-6155] done synthesizing module 'simple_bram_memory' (0#1) [C:/VIVADO-proj1/New folder/src/cpu/simple_bram_memory.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'sentinel_rv_security' (0#1) [C:/VIVADO-proj1/New folder/src/sentinel_rv_security.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'sentinel_rv_top' (0#1) [C:/VIVADO-proj1/New folder/src/sentinel_rv_top.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'sentinel_rv_board_top' (0#1) [C:/VIVADO-proj1/New folder/src/sentinel_rv_board_top.v:3]
+WARNING: [Synth 8-6014] Unused sequential element pcpi_ready_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:2309]
+WARNING: [Synth 8-6014] Unused sequential element pcpi_wr_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:2466]
+WARNING: [Synth 8-6014] Unused sequential element mem_la_firstword_reg_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:392]
+WARNING: [Synth 8-6014] Unused sequential element last_mem_valid_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:393]
+WARNING: [Synth 8-6014] Unused sequential element next_insn_opcode_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:433]
+WARNING: [Synth 8-6014] Unused sequential element mem_la_secondword_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:571]
+WARNING: [Synth 8-6014] Unused sequential element prefetched_high_word_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:572]
+WARNING: [Synth 8-6014] Unused sequential element q_ascii_instr_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:779]
+WARNING: [Synth 8-6014] Unused sequential element q_insn_imm_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:780]
+WARNING: [Synth 8-6014] Unused sequential element q_insn_opcode_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:781]
+WARNING: [Synth 8-6014] Unused sequential element q_insn_rs1_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:782]
+WARNING: [Synth 8-6014] Unused sequential element q_insn_rs2_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:783]
+WARNING: [Synth 8-6014] Unused sequential element q_insn_rd_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:784]
+WARNING: [Synth 8-6014] Unused sequential element dbg_next_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:785]
+WARNING: [Synth 8-6014] Unused sequential element dbg_valid_insn_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:788]
+WARNING: [Synth 8-6014] Unused sequential element cached_ascii_instr_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:793]
+WARNING: [Synth 8-6014] Unused sequential element cached_insn_imm_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:794]
+WARNING: [Synth 8-6014] Unused sequential element cached_insn_opcode_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:796]
+WARNING: [Synth 8-6014] Unused sequential element cached_insn_rs1_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:799]
+WARNING: [Synth 8-6014] Unused sequential element cached_insn_rs2_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:800]
+WARNING: [Synth 8-6014] Unused sequential element cached_insn_rd_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:801]
+WARNING: [Synth 8-6014] Unused sequential element dbg_insn_addr_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:805]
+WARNING: [Synth 8-6014] Unused sequential element clear_prefetched_high_word_q_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1293]
+WARNING: [Synth 8-6014] Unused sequential element set_mem_do_rinst_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1406]
+WARNING: [Synth 8-6014] Unused sequential element set_mem_do_rdata_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1407]
+WARNING: [Synth 8-6014] Unused sequential element set_mem_do_wdata_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1408]
+WARNING: [Synth 8-6014] Unused sequential element alu_out_0_q_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1410]
+WARNING: [Synth 8-6014] Unused sequential element alu_wait_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1413]
+WARNING: [Synth 8-6014] Unused sequential element alu_wait_2_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1414]
+WARNING: [Synth 8-6014] Unused sequential element dbg_rs1val_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1417]
+WARNING: [Synth 8-6014] Unused sequential element dbg_rs2val_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1418]
+WARNING: [Synth 8-6014] Unused sequential element dbg_rs1val_valid_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1419]
+WARNING: [Synth 8-6014] Unused sequential element dbg_rs2val_valid_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1420]
+WARNING: [Synth 8-6014] Unused sequential element next_irq_pending_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1440]
+WARNING: [Synth 8-6014] Unused sequential element decoder_trigger_q_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1447]
+WARNING: [Synth 8-6014] Unused sequential element decoder_pseudo_trigger_q_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1449]
+WARNING: [Synth 8-6014] Unused sequential element latched_trace_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1465]
+WARNING: [Synth 8-6014] Unused sequential element irq_active_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1471]
+WARNING: [Synth 8-6014] Unused sequential element irq_delay_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1472]
+WARNING: [Synth 8-6014] Unused sequential element irq_mask_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1473]
+WARNING: [Synth 8-6014] Unused sequential element irq_state_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1475]
+WARNING: [Synth 8-6014] Unused sequential element timer_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1477]
+WARNING: [Synth 8-6014] Unused sequential element current_pc_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1495]
+WARNING: [Synth 8-6014] Unused sequential element irq_pending_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1963]
+WARNING: [Synth 8-6014] Unused sequential element trace_valid_reg was removed.  [C:/VIVADO-proj1/New folder/src/cpu/picorv32.v:1452]
+WARNING: [Synth 8-6014] Unused sequential element sevenseg_timer_reg was removed.  [C:/VIVADO-proj1/New folder/src/sentinel_rv_top.v:152]
+WARNING: [Synth 8-6014] Unused sequential element disp_mode_select_reg was removed.  [C:/VIVADO-proj1/New folder/src/sentinel_rv_top.v:155]
+WARNING: [Synth 8-6014] Unused sequential element sd_write_error_latched_reg was removed.  [C:/VIVADO-proj1/New folder/src/sentinel_rv_board_top.v:73]
+WARNING: [Synth 8-3917] design sentinel_rv_board_top has port led[7] driven by constant 1
+WARNING: [Synth 8-7129] Port mem_addr[31] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[30] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[29] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[28] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[27] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[26] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[25] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[24] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[23] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[22] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[21] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[20] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[19] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[18] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[17] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[16] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[15] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[14] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[13] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[12] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[1] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port mem_addr[0] in module simple_bram_memory is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[24] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[23] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[22] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[21] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[20] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[19] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[18] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[17] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[16] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[15] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[11] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[10] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[9] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[8] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[7] in module picorv32_pcpi_div is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[24] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[23] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[22] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[21] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[20] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[19] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[18] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[17] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[16] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[15] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[11] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[10] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[9] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[8] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_insn[7] in module picorv32_pcpi_mul is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_wr in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[31] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[30] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[29] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[28] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[27] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[26] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[25] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[24] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[23] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[22] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[21] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[20] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[19] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[18] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[17] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[16] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[15] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[14] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[13] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[12] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[11] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[10] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[9] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[8] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[7] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[6] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[5] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[4] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[3] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[2] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[1] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_rd[0] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_wait in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pcpi_ready in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[31] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[30] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[29] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[28] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[27] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[26] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[25] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[24] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[23] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[22] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[21] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[20] in module picorv32 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port irq[19] in module picorv32 is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:25 ; elapsed = 00:00:31 . Memory (MB): peak = 1809.070 ; gain = 1091.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:33 . Memory (MB): peak = 1809.070 ; gain = 1091.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:26 ; elapsed = 00:00:33 . Memory (MB): peak = 1809.070 ; gain = 1091.297
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1809.070 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/VIVADO-proj1/New folder/src/constraints/sentinel_rv.xdc]
+Finished Parsing XDC File [C:/VIVADO-proj1/New folder/src/constraints/sentinel_rv.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/VIVADO-proj1/New folder/src/constraints/sentinel_rv.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/sentinel_rv_board_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/sentinel_rv_board_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.045 . Memory (MB): peak = 1874.438 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:01:02 ; elapsed = 00:01:11 . Memory (MB): peak = 1874.438 ; gain = 1156.664
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tftg256-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:02 ; elapsed = 00:01:11 . Memory (MB): peak = 1874.438 ; gain = 1156.664
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:01:02 ; elapsed = 00:01:11 . Memory (MB): peak = 1874.438 ; gain = 1156.664
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'uart_rx'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'dht11_controller'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'hc_sr04_controller'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'lcd_controller'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'lcd_driver'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'sevenseg_driver'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'sd_logger'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'sd_sector_writer'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'sd_card_init'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'packet_formatter'
+INFO: [Synth 8-802] inferred FSM for state register 'mem_state_reg' in module 'picorv32'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                               00 |                               00
+                   START |                               01 |                               01
+                    DATA |                               10 |                               10
+                  iSTATE |                               11 |                               11
+*
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'uart_rx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                         00000001 |                             0000
+               START_LOW |                         00000010 |                             0001
+              START_HIGH |                         00000100 |                             0010
+            WAIT_ACK_LOW |                         00001000 |                             0011
+           WAIT_ACK_HIGH |                         00010000 |                             0100
+           WAIT_DATA_LOW |                         00100000 |                             0101
+          WAIT_DATA_HIGH |                         01000000 |                             0110
+                    DONE |                         10000000 |                             0111
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'dht11_controller'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                               00 |                              000
+                    TRIG |                               01 |                              001
+               WAIT_ECHO |                               10 |                              010
+                 MEASURE |                               11 |                              011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'hc_sr04_controller'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    INIT |                              000 |                              000
+            WAIT_REFRESH |                              001 |                              001
+              LINE1_ADDR |                              010 |                              010
+              LINE1_DATA |                              011 |                              011
+              LINE2_ADDR |                              100 |                              100
+                  iSTATE |                              101 |                              101
+*
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'lcd_controller'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                               00 |                              000
+                   SETUP |                               01 |                              001
+                   PULSE |                               10 |                              010
+                  iSTATE |                               11 |                              011
+*
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'lcd_driver'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                            00001 |                              000
+                    LOAD |                            00010 |                              001
+                    HIGH |                            00100 |                              010
+                     LOW |                            01000 |                              011
+                   LATCH |                            10000 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'sevenseg_driver'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              001 |                               00
+                  LAUNCH |                              010 |                               01
+                    WAIT |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'sd_logger'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              000 |                              000
+                 COMMAND |                              001 |                              001
+                RESPONSE |                              010 |                              010
+                    DATA |                              011 |                              011
+           DATA_RESPONSE |                              100 |                              100
+               BUSY_WAIT |                              101 |                              101
+                 RELEASE |                              110 |                              110
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'sd_sector_writer'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                PRECLOCK |                              000 |                              000
+                 COMMAND |                              001 |                              001
+                RESPONSE |                              010 |                              010
+                 RELEASE |                              011 |                              100
+            EXT_RESPONSE |                              100 |                              011
+                  iSTATE |                              101 |                              101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'sd_card_init'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                           000001 |                              000
+               AES_START |                           000010 |                              001
+                AES_WAIT |                           000100 |                              010
+               CRC_START |                           001000 |                              011
+                CRC_SEND |                           010000 |                              100
+                  iSTATE |                           100000 |                              101
+*
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'packet_formatter'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE2 |                               00 |                               00
+                 iSTATE0 |                               01 |                               10
+                  iSTATE |                               10 |                               01
+                 iSTATE1 |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'mem_state_reg' using encoding 'sequential' in module 'picorv32'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:28 ; elapsed = 00:01:41 . Memory (MB): peak = 1874.438 ; gain = 1156.664
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   63 Bit       Adders := 1     
+	   2 Input   32 Bit       Adders := 13    
+	   3 Input   32 Bit       Adders := 1     
+	   2 Input   27 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 3     
+	   4 Input   16 Bit       Adders := 1     
+	   3 Input   16 Bit       Adders := 1     
+	   2 Input   11 Bit       Adders := 1     
+	   2 Input   10 Bit       Adders := 1     
+	   2 Input    9 Bit       Adders := 1     
+	   2 Input    8 Bit       Adders := 3     
+	   4 Input    8 Bit       Adders := 1     
+	   2 Input    7 Bit       Adders := 2     
+	   2 Input    6 Bit       Adders := 5     
+	   2 Input    5 Bit       Adders := 6     
+	   3 Input    5 Bit       Adders := 16    
+	   2 Input    4 Bit       Adders := 14    
+	   3 Input    4 Bit       Adders := 2     
+	   2 Input    3 Bit       Adders := 5     
+	   2 Input    2 Bit       Adders := 4     
++---XORs : 
+	   2 Input    128 Bit         XORs := 7     
+	   3 Input     32 Bit         XORs := 2     
+	   2 Input     32 Bit         XORs := 15    
+	   2 Input      8 Bit         XORs := 7313  
+	   6 Input      8 Bit         XORs := 40    
+	   5 Input      8 Bit         XORs := 32    
+	  10 Input      8 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 8     
+	   4 Input      1 Bit         XORs := 1     
++---Registers : 
+	              256 Bit    Registers := 3     
+	              240 Bit    Registers := 1     
+	              128 Bit    Registers := 18    
+	              127 Bit    Registers := 2     
+	               64 Bit    Registers := 10    
+	               63 Bit    Registers := 1     
+	               40 Bit    Registers := 1     
+	               36 Bit    Registers := 1     
+	               32 Bit    Registers := 26    
+	               27 Bit    Registers := 1     
+	               24 Bit    Registers := 2     
+	               19 Bit    Registers := 1     
+	               16 Bit    Registers := 19    
+	               12 Bit    Registers := 5     
+	               10 Bit    Registers := 1     
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 40    
+	                7 Bit    Registers := 2     
+	                6 Bit    Registers := 5     
+	                5 Bit    Registers := 11    
+	                4 Bit    Registers := 16    
+	                3 Bit    Registers := 9     
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 214   
++---RAMs : 
+	              32K Bit	(1024 X 32 bit)          RAMs := 1     
+	               4K Bit	(64 X 64 bit)          RAMs := 1     
+	             1024 Bit	(32 X 32 bit)          RAMs := 1     
++---Muxes : 
+	   2 Input  128 Bit        Muxes := 8     
+	   4 Input  127 Bit        Muxes := 2     
+	   2 Input  127 Bit        Muxes := 2     
+	   3 Input  127 Bit        Muxes := 1     
+	   2 Input   64 Bit        Muxes := 8     
+	   3 Input   64 Bit        Muxes := 1     
+	   2 Input   63 Bit        Muxes := 2     
+	   2 Input   32 Bit        Muxes := 47    
+	   3 Input   32 Bit        Muxes := 3     
+	   5 Input   32 Bit        Muxes := 1     
+	   6 Input   32 Bit        Muxes := 1     
+	   4 Input   32 Bit        Muxes := 9     
+	   8 Input   32 Bit        Muxes := 1     
+	   6 Input   27 Bit        Muxes := 1     
+	   3 Input   19 Bit        Muxes := 1     
+	   2 Input   16 Bit        Muxes := 12    
+	   5 Input   16 Bit        Muxes := 1     
+	   4 Input   16 Bit        Muxes := 3     
+	   7 Input   16 Bit        Muxes := 1     
+	   2 Input   11 Bit        Muxes := 1     
+	   7 Input   10 Bit        Muxes := 1     
+	   7 Input    9 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 7620  
+	   4 Input    8 Bit        Muxes := 6     
+	   3 Input    8 Bit        Muxes := 3     
+	   8 Input    8 Bit        Muxes := 1     
+	   6 Input    8 Bit        Muxes := 3     
+	   7 Input    8 Bit        Muxes := 1     
+	   5 Input    8 Bit        Muxes := 1     
+	   4 Input    7 Bit        Muxes := 2     
+	   3 Input    7 Bit        Muxes := 2     
+	   2 Input    7 Bit        Muxes := 3     
+	   6 Input    6 Bit        Muxes := 1     
+	   3 Input    6 Bit        Muxes := 1     
+	   8 Input    6 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 2     
+	   4 Input    6 Bit        Muxes := 1     
+	   6 Input    5 Bit        Muxes := 2     
+	   3 Input    5 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 5     
+	   5 Input    5 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 12    
+	   3 Input    4 Bit        Muxes := 5     
+	   5 Input    4 Bit        Muxes := 3     
+	   4 Input    4 Bit        Muxes := 3     
+	   6 Input    4 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 12    
+	   8 Input    3 Bit        Muxes := 1     
+	   3 Input    3 Bit        Muxes := 2     
+	   4 Input    3 Bit        Muxes := 2     
+	   5 Input    3 Bit        Muxes := 1     
+	   6 Input    3 Bit        Muxes := 2     
+	   7 Input    3 Bit        Muxes := 2     
+	  16 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 11    
+	   4 Input    2 Bit        Muxes := 5     
+	   6 Input    2 Bit        Muxes := 1     
+	   3 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 248   
+	   6 Input    1 Bit        Muxes := 40    
+	   4 Input    1 Bit        Muxes := 41    
+	   3 Input    1 Bit        Muxes := 11    
+	   7 Input    1 Bit        Muxes := 19    
+	   5 Input    1 Bit        Muxes := 12    
+	   8 Input    1 Bit        Muxes := 9     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3917] design sentinel_rv_board_top has port led[7] driven by constant 1
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:16:33 ; elapsed = 00:19:31 . Memory (MB): peak = 3868.328 ; gain = 3150.555
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++----------------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name           | RTL Object        | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++----------------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|sentinel_rv_board_top | memory/memory_reg | 1 K x 32(READ_FIRST)   | W |   | 1 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
++----------------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+Distributed RAM: Preliminary Mapping Report (see note below)
++---------------------------+------------------------+-----------+----------------------+--------------+
+|Module Name                | RTL Object             | Inference | Size (Depth x Width) | Primitives   | 
++---------------------------+------------------------+-----------+----------------------+--------------+
+|security_corei_9/\cpu/cpu  | cpuregs_reg            | Implied   | 32 x 32              | RAM32M x 12  | 
+|sentinel_rv_board_top      | replay/nonce_table_reg | Implied   | 64 x 64              | RAM64M x 22  | 
++---------------------------+------------------------+-----------+----------------------+--------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:16:47 ; elapsed = 00:19:50 . Memory (MB): peak = 3868.328 ; gain = 3150.555
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:20:17 ; elapsed = 00:24:02 . Memory (MB): peak = 6008.145 ; gain = 5290.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++----------------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name           | RTL Object        | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++----------------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|sentinel_rv_board_top | memory/memory_reg | 1 K x 32(READ_FIRST)   | W |   | 1 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
++----------------------+-------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+
+Distributed RAM: Final Mapping Report
++---------------------------+------------------------+-----------+----------------------+--------------+
+|Module Name                | RTL Object             | Inference | Size (Depth x Width) | Primitives   | 
++---------------------------+------------------------+-----------+----------------------+--------------+
+|security_corei_9/\cpu/cpu  | cpuregs_reg            | Implied   | 32 x 32              | RAM32M x 12  | 
+|sentinel_rv_board_top      | replay/nonce_table_reg | Implied   | 64 x 64              | RAM64M x 22  | 
++---------------------------+------------------------+-----------+----------------------+--------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance system_wrapper/security_core/memory/memory_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:20:33 ; elapsed = 00:24:21 . Memory (MB): peak = 6008.145 ; gain = 5290.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:20:45 ; elapsed = 00:24:36 . Memory (MB): peak = 6008.145 ; gain = 5290.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:20:45 ; elapsed = 00:24:37 . Memory (MB): peak = 6008.145 ; gain = 5290.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:20:48 ; elapsed = 00:24:39 . Memory (MB): peak = 6008.145 ; gain = 5290.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:20:48 ; elapsed = 00:24:40 . Memory (MB): peak = 6008.145 ; gain = 5290.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:20:49 ; elapsed = 00:24:41 . Memory (MB): peak = 6008.145 ; gain = 5290.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:20:49 ; elapsed = 00:24:41 . Memory (MB): peak = 6008.145 ; gain = 5290.371
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |BUFG     |     1|
+|2     |CARRY4   |   244|
+|3     |LUT1     |   171|
+|4     |LUT2     |  1459|
+|5     |LUT3     |  1307|
+|6     |LUT4     |  1957|
+|7     |LUT5     |  2156|
+|8     |LUT6     |  6179|
+|9     |MUXF7    |   122|
+|10    |MUXF8    |    51|
+|11    |RAM32M   |    10|
+|12    |RAM32X1D |     4|
+|13    |RAM64M   |    11|
+|14    |RAM64X1D |     1|
+|15    |RAMB36E1 |     1|
+|16    |FDRE     |  3814|
+|17    |FDSE     |   122|
+|18    |IBUF     |    14|
+|19    |IOBUF    |     1|
+|20    |OBUF     |    36|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:20:49 ; elapsed = 00:24:41 . Memory (MB): peak = 6008.145 ; gain = 5290.371
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 4 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:20:02 ; elapsed = 00:24:21 . Memory (MB): peak = 6008.145 ; gain = 5225.004
+Synthesis Optimization Complete : Time (s): cpu = 00:20:49 ; elapsed = 00:24:42 . Memory (MB): peak = 6008.145 ; gain = 5290.371
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.302 . Memory (MB): peak = 6008.145 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 445 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 6008.145 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 27 instances were transformed.
+  IOBUF => IOBUF (IBUF, OBUFT): 1 instance 
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 10 instances
+  RAM32X1D => RAM32X1D (RAMD32(x2)): 4 instances
+  RAM64M => RAM64M (RAMD64E(x4)): 11 instances
+  RAM64X1D => RAM64X1D (RAMD64E(x2)): 1 instance 
+
+Synth Design complete | Checksum: 59a995cd
+INFO: [Common 17-83] Releasing license: Synthesis
+135 Infos, 158 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:21:11 ; elapsed = 00:25:31 . Memory (MB): peak = 6008.145 ; gain = 5477.992
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.087 . Memory (MB): peak = 6008.145 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/VIVADO-proj1/New folder/Sentinel_RV-Project/Sentinel_RV-Project.runs/synth_1/sentinel_rv_board_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file sentinel_rv_board_top_utilization_synth.rpt -pb sentinel_rv_board_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Thu Jul 30 16:05:37 2026...
