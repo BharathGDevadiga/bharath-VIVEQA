@@ -66,8 +66,8 @@ This directory contains the 32-bit RISC-V hardware description code written in V
   * **Uses:** Provides non-volatile tamper-evident security audit trails.
 
 * **`sevenseg_driver.v`**
-  * **What it is:** MAX7219 SPI driver for the 4-digit 7-segment display.
-  * **Why it is used:** Drives segment multiplexing for temperature and distance readouts.
+  * **What it is:** Multiplexed 4-digit 7-segment display driver.
+  * **Why it is used:** Drives segment multiplexing for temperature, distance, and voltage readouts.
   * **Uses:** Displays real-time sensor metrics (`t. 28`, `d. 34`, `U.1.65`).
 
 * **`lcd_controller.v` and `lcd_driver.v`**
@@ -111,12 +111,3 @@ This directory contains desktop graphical user interface tools built using Pytho
   * **Why it is used:** Reads raw physical disk sectors (`\\.\PhysicalDriveX`) from Micro-SD cards formatted by the FPGA.
   * **Uses:** Decrypts AES audit records and displays security log histories with elevated Windows UAC administrator permissions.
 
-* **`App4_Unified_Master.py`**
-  * **What it is:** Unified master application combining control center and log inspection functionality.
-  * **Why it is used:** Serves as an all-in-one suite for demonstration and testing.
-  * **Uses:** Allows simultaneous telemetry monitoring and command transmission.
-
-* **`read_sd_log.py`**
-  * **What it is:** Command-line Micro-SD log extraction script.
-  * **Why it is used:** Parses raw binary log files for automated verification and debugging.
-  * **Uses:** Validates cryptographic hash chains and timestamp sequence numbers.
