@@ -21,14 +21,4 @@ This directory contains all desktop control centers, live graphing tools and Mic
   * Decrypts 512-byte hardware AES audit log records and displays historical security logs.
   * Embedded with a `--uac-admin` manifest to automatically prompt for Windows UAC Administrator rights on double-click.
 
-#### 3. `App4_Unified_Master.py`
-* **What it is:** Comprehensive master application combining control center, live graphing and log inspection.
-* **Why it is used:** Serves as a single unified executable for demonstration and testing on Demo Day.
-* **Uses and Capabilities:**
-  * Allows simultaneous telemetry plotting, LCD role sync and hardware command execution.
 
-#### 4. `read_sd_log.py`
-* **What it is:** Command-line Micro-SD log extraction and hash chain validation utility.
-* **Why it is used:** Extracts binary audit records for offline security analysis.
-* **Uses and Capabilities:**
-  * Verifies 64-bit nonces, timestamps and cryptographic digests.
