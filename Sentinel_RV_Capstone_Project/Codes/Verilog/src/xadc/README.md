@@ -6,7 +6,7 @@ This directory contains the driver module for the Xilinx Artix-7 FPGA internal d
 
 ### 📌 Module Explanations:
 
-#### 1. xadc_monitor.v
+#### 1. `xadc_monitor.v`
 * **What it is:** Xilinx XADC Primitive Monitor.
 * **Why it is used:** Continuously measures internal FPGA die temperature and internal power supply voltage rails (VCCINT, VCCAUX).
 * **Uses & Capabilities in Sentinel-RV:**

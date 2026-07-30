@@ -46,14 +46,14 @@ damage the intended interface.
 Use a Verilog-2001/SystemVerilog-capable simulator.  Example with Icarus:
 
 ```text
-iverilog -g2012 -s ttb_uart_top -o sim tb/ttb_uart_top.v uart/*.v
+iverilog -g2012 -s ttb_uart_top -o sim tb/`ttb_uart_top.v` uart/*.v
 vvp sim
 ```
 
 To compile and run every supplied testbench on Windows PowerShell:
 
 ```text
-.\tb\run_tests.ps1
+.\tb\`run_tests.ps1`
 ```
 
 Hardware use requires a reset source.  `reset` is synchronous active-high in

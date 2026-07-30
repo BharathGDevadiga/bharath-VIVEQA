@@ -1,4 +1,4 @@
-# FPGA Design Constraints: sentinel_rv.xdc
+# FPGA Design Constraints: `sentinel_rv.xdc`
 
 This directory contains the Xilinx Design Constraints (.xdc) file for the Artix-7 FPGA target board.
 
@@ -6,7 +6,7 @@ This directory contains the Xilinx Design Constraints (.xdc) file for the Artix-
 
 ### 📌 File Explanations:
 
-#### 1. sentinel_rv.xdc
+#### 1. `sentinel_rv.xdc`
 * **What it is:** Physical pin mapping and IO standard constraint configuration file.
 * **Why it is used:** Maps internal Verilog signals to physical FPGA board pins and sets IO voltage standards.
 * **Uses & Capabilities in Sentinel-RV:**
