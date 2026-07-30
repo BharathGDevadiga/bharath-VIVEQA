@@ -10,7 +10,7 @@ This directory contains the core security enforcement modules implementing anti-
 * **What it is:** Master Security State Machine.
 * **Why it is used:** Evaluates security authorization policies, manages alarm states, and enforces access control rules.
 
-#### 2. `once_generator.v`
+#### 2. `nonce_generator.v`
 * **What it is:** Pseudo-random dynamic Nonce generator.
 * **Why it is used:** Generates unique cryptographic nonces for every telemetry packet to prevent replay attacks.
 
