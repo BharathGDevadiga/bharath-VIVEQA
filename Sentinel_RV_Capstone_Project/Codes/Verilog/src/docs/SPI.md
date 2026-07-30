@@ -4,6 +4,6 @@
 stack has a separate byte-oriented mode-0 engine so it can hold card select
 across CMD24 and a data block.
 
-The manual conflicts about SPI/SD wiring. `team2.xdc` chooses G11/G12/G14/H14
+The manual conflicts about SPI/SD wiring. `Peripheral Subsystem.xdc` chooses G11/G12/G14/H14
 for the ADC and C11/B12/D8/B11 for SD, which are the detailed peripheral-table
 assignments. Verify these against the schematic before hardware testing.

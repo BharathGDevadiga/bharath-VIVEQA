@@ -1,8 +1,8 @@
 # SD Audit Storage
 
 `audit_log_writer` stores `{previous_digest,event_digest}` and advances its
-chain head only after `sd_logger` accepts the record. Team 1 must calculate
-`event_digest` over the event metadata and previous hash; Team 2 never replaces
+chain head only after `sd_logger` accepts the record. System Subsystem must calculate
+`event_digest` over the event metadata and previous hash; Peripheral Subsystem never replaces
 that operation with a non-cryptographic hash.
 
 `sd_card_init` automatically clocks the card then runs CMD0, CMD8,
