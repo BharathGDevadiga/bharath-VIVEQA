@@ -46,7 +46,7 @@ damage the intended interface.
 Use a Verilog-2001/SystemVerilog-capable simulator.  Example with Icarus:
 
 ```text
-iverilog -g2012 -s ttb_uart_top -o sim tb/ttb_uart_top.v uart/*.v
+iverilog -g2012 -s tb_uart_top -o sim tb/tb_uart_top.v uart/*.v
 vvp sim
 ```
 
