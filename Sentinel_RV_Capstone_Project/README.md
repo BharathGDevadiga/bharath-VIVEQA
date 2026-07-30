@@ -1,12 +1,12 @@
 # Sentinel-RV Capstone Project: RISC-V Hardware Security & Telemetry System
 
-Welcome to the **Sentinel-RV Capstone Project** repository. This project implements a secure, FPGA-based System-on-Chip (SoC) powered by an open-source 32-bit RISC-V processor (`PicoRV32`), hardware-accelerated AES-128 encryption, anti-replay security controllers, multi-sensor telemetry collection, and desktop GUI monitoring applications.
+Welcome to the **Sentinel-RV Capstone Project** repository. This project implements a secure, FPGA-based System-on-Chip (SoC) powered by an open-source 32-bit RISC-V processor (`PicoRV32`), hardware-accelerated AES-128 encryption, anti-replay security controllers, multi-sensor telemetry collection and desktop GUI monitoring applications.
 
 ---
 
 ## 📌 System Architecture & Project Structure
 
-The project is organized into structured directories for hardware description code, simulation, and software applications:
+The project is organized into structured directories for hardware description code, simulation and software applications:
 
 ```text
 Sentinel_RV_Capstone_Project/
@@ -28,9 +28,9 @@ Sentinel_RV_Capstone_Project/
 1. **32-Bit RISC-V CPU Core (`PicoRV32`):** Executes embedded firmware instructions to manage memory-mapped I/O peripherals and process security policies.
 2. **Hardware AES-128 Encryption Engine (`aes128_encrypt.v`):** Encrypts sensor data streams and Micro-SD audit logs in hardware.
 3. **Anti-Replay Security Controller (`replay_protection.v` & `nonce_generator.v`):** Generates 64-bit dynamic nonces to reject replayed unauthorized commands.
-4. **Environmental & Intrusion Telemetry:** Interfaced with DHT11 (Temperature & Humidity), HC-SR04 (Ultrasonic Distance), MCP3202 (12-bit SPI ADC), and internal Artix-7 XADC (die temperature & voltage rails).
+4. **Environmental & Intrusion Telemetry:** Interfaced with DHT11 (Temperature & Humidity), HC-SR04 (Ultrasonic Distance), MCP3202 (12-bit SPI ADC) and internal Artix-7 XADC (die temperature & voltage rails).
 5. **SPI Micro-SD Audit Logger (`sd_logger.v`):** Writes encrypted, tamper-evident security audit logs directly to physical SD card sectors.
-6. **Local User Interface & Safety Isolation:** Keypad (4x4 matrix input), 16x2 LCD display, 4-digit 7-segment display, piezo alarm siren, and relay power isolation switches.
+6. **Local User Interface & Safety Isolation:** Keypad (4x4 matrix input), 16x2 LCD display, 4-digit 7-segment display, piezo alarm siren and relay power isolation switches.
 
 ---
 

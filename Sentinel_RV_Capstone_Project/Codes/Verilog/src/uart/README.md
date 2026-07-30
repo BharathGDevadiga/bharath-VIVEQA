@@ -8,7 +8,7 @@ This directory contains full-duplex asynchronous serial UART communication drive
 
 #### 1. `uart_top.v`
 * **What it is:** Top-level UART communication wrapper module.
-* **Why it is used:** Combines transmitter, receiver, and baud rate generator into a single unified UART controller.
+* **Why it is used:** Combines transmitter, receiver and baud rate generator into a single unified UART controller.
 
 #### 2. `uart_tx.v` & `uart_rx.v`
 * **What they are:** Asynchronous Serial Transmitter and Receiver modules with start/stop bit framing and parity checking.

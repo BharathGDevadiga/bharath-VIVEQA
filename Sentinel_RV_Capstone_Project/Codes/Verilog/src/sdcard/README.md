@@ -12,7 +12,7 @@ This directory contains the SPI SD card driver modules responsible for persisten
 
 #### 2. `udit_log_writer.v`
 * **What it is:** Event log entry formatter.
-* **Why it is used:** Formats timestamps, event codes, and sensor data into standardized log entries.
+* **Why it is used:** Formats timestamps, event codes and sensor data into standardized log entries.
 
 #### 3. `sd_card_init.v`
 * **What it is:** SD Card SPI initialization state machine.

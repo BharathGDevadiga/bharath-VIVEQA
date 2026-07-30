@@ -10,7 +10,7 @@ This directory contains the 32-bit RISC-V soft processor core and associated mem
 * **What it is:** Open-source 32-bit RISC-V (RV32I) soft CPU core.
 * **Why it is used:** Serves as the central processing brain for the Sentinel-RV system.
 * **Uses & Capabilities in Sentinel-RV:**
-  * Executes embedded firmware instructions to coordinate system tasks, evaluate security policies, and communicate with peripherals.
+  * Executes embedded firmware instructions to coordinate system tasks, evaluate security policies and communicate with peripherals.
 
 #### 2. `simple_bram_memory.v`
 * **What it is:** Dual-port Block RAM (BRAM) memory module pre-loaded with firmware (`cpu_test_program.hex`).

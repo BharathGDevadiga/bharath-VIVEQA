@@ -1,6 +1,6 @@
 # System Integration & Peripheral Aggregator
 
-This directory contains the central peripheral integration modules connecting sensors, bridges, and peripherals to the top-level architecture.
+This directory contains the central peripheral integration modules connecting sensors, bridges and peripherals to the top-level architecture.
 
 ---
 

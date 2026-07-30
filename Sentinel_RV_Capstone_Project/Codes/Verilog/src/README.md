@@ -1,6 +1,6 @@
 # Sentinel-RV Peripheral & Hardware Subsystem
 
-Synthesizable Verilog HDL design for the peripherals and security boundary surrounding the `sentinel_rv_security` core and 32-bit RISC-V CPU on the AT-STLN-ARTIX7-001 Artix-7 FPGA board. Designed, synthesized, and simulated using the **AMD/Xilinx Vivado Design Suite (Version 2025.2)**.
+Synthesizable Verilog HDL design for the peripherals and security boundary surrounding the `sentinel_rv_security` core and 32-bit RISC-V CPU on the AT-STLN-ARTIX7-001 Artix-7 FPGA board. Designed, synthesized and simulated using the **AMD/Xilinx Vivado Design Suite (Version 2025.2)**.
 
 ---
 
@@ -15,7 +15,7 @@ The Peripheral Subsystem (`peripheral_top.v`) manages all external hardware inte
   * `hc_sr04_echo` / `hc_sr04_trigger`: Ultrasonic distance proximity measurements.
   * `core_command_*`: Framed UART serial commands received from external trusted control centers.
   * `core_key_*`: Local 4x4 matrix keypad input events.
-* **HMI & Output Interfacing:** `sentinel_rv_top.v` coordinates system telemetry, LCD character messages, 7-segment numeric multiplexing, piezo alarm sirens, and relay safety switches.
+* **HMI & Output Interfacing:** `sentinel_rv_top.v` coordinates system telemetry, LCD character messages, 7-segment numeric multiplexing, piezo alarm sirens and relay safety switches.
 
 ---
 
@@ -36,7 +36,7 @@ The Peripheral Subsystem (`peripheral_top.v`) manages all external hardware inte
   * **Micro-SD Card SPI:** Pins C11, B12, D8, B11.
   * **UART Serial Line:** PMOD TX/RX pins.
   * **Matrix Keypad:** 4x4 row/column pin assignments.
-  * **User Outputs:** 8 status LEDs, 4-digit 7-segment display, 16x2 LCD, piezo buzzer, and safety relay output.
+  * **User Outputs:** 8 status LEDs, 4-digit 7-segment display, 16x2 LCD, piezo buzzer and safety relay output.
 
 ---
 

@@ -6,7 +6,7 @@ chain head only after `sd_logger` accepts the record. System Subsystem must calc
 that operation with a non-cryptographic hash.
 
 `sd_card_init` automatically clocks the card then runs CMD0, CMD8,
-CMD55/ACMD41 (HCS), and CMD58. `team2_top` holds audit records until it
+CMD55/ACMD41 (HCS) and CMD58. `team2_top` holds audit records until it
 reports ready. The initialization path accepts SDHC cards only; add an SDSC
 addressing branch if legacy byte-addressed cards must be supported.
 

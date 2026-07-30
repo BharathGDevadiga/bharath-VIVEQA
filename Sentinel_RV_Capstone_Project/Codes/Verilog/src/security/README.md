@@ -1,6 +1,6 @@
 # Hardware Security Core
 
-This directory contains the core security enforcement modules implementing anti-replay protection, dynamic nonces, and authorization policies.
+This directory contains the core security enforcement modules implementing anti-replay protection, dynamic nonces and authorization policies.
 
 ---
 
@@ -8,7 +8,7 @@ This directory contains the core security enforcement modules implementing anti-
 
 #### 1. `security_controller.v`
 * **What it is:** Master Security State Machine.
-* **Why it is used:** Evaluates security authorization policies, manages alarm states, and enforces access control rules.
+* **Why it is used:** Evaluates security authorization policies, manages alarm states and enforces access control rules.
 
 #### 2. `nonce_generator.v`
 * **What it is:** Pseudo-random dynamic Nonce generator.

@@ -67,7 +67,7 @@ This directory contains the 32-bit RISC-V hardware description code written in V
 
 * **`sevenseg_driver.v`**
   * **What it is:** Multiplexed 4-digit 7-segment display driver.
-  * **Why it is used:** Drives segment multiplexing for temperature, distance, and voltage readouts.
+  * **Why it is used:** Drives segment multiplexing for temperature, distance and voltage readouts.
   * **Uses:** Displays real-time sensor metrics (`t. 28`, `d. 34`, `U.1.65`).
 
 * **`lcd_controller.v` and `lcd_driver.v`**

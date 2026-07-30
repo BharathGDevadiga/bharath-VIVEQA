@@ -15,6 +15,6 @@ This directory contains the SPI driver modules for interfacing with the external
 
 #### 2. `spi_master.v`
 * **What it is:** Generic full-duplex SPI bus master controller.
-* **Why it is used:** Generates low-level SPI clock (dc_sck), MOSI, MISO, and Chip Select timing signals.
+* **Why it is used:** Generates low-level SPI clock (dc_sck), MOSI, MISO and Chip Select timing signals.
 * **Uses & Capabilities in Sentinel-RV:**
   * Handles low-level SPI communication for the MCP3202 ADC module with configurable clock division.
