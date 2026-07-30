@@ -42,9 +42,6 @@ module tb_sentinel_rv_top;
     wire seg_clk;
     wire seg_load;
     wire relay_in;
-    wire motor_in1;
-    wire motor_in2;
-    wire [3:0] stepper;
     wire security_command_accepted;
     wire security_command_rejected;
     wire security_alarm;
@@ -111,7 +108,7 @@ module tb_sentinel_rv_top;
         .lcd_rs(lcd_rs), .lcd_rw(lcd_rw), .lcd_en(lcd_en), .lcd_d(lcd_d),
         .keypad_row_n(keypad_row_n), .keypad_col_n(keypad_col_n),
         .led(led), .buzzer(buzzer), .seg_din(seg_din), .seg_clk(seg_clk), .seg_load(seg_load),
-        .relay_in(relay_in), .motor_in1(motor_in1), .motor_in2(motor_in2), .stepper(stepper),
+        .relay_in(relay_in),
         .security_clear_alarm(security_clear_alarm),
         .security_xadc_sample_valid(security_xadc_sample_valid),
         .security_xadc_vccint_code(security_xadc_vccint_code),

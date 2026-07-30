@@ -119,7 +119,6 @@ module sentinel_rv_board_top #(
     ) system_wrapper (
         .clk_24mhz(clk_24mhz), .reset(reset),
         .pmod_uart_rx(pmod_uart_rx), .pmod_uart_tx(pmod_uart_tx),
-        .esp_uart_rx(1'b1), .esp_uart_tx(),
         .adc_sck(adc_sck), .adc_mosi(adc_mosi), .adc_miso(adc_miso), .adc_cs_n(adc_cs_n),
         .sd_clk(sd_clk), .sd_cmd(sd_cmd), .sd_d0(sd_d0), .sd_cs_n(sd_cs_n), .sd_detect_n(sd_detect_n),
         .lcd_rs(lcd_rs), .lcd_rw(lcd_rw), .lcd_en(lcd_en), .lcd_d(lcd_d),

@@ -1,17 +1,23 @@
 `timescale 1ns/1ps
 
-// Combined Team 1 + Team 2 board wrapper.
-// Team 2 validates transport framing; Team 1 makes the security decision.
-module sentinel_rv_top (
+// Combined peripheral + security board wrapper.
+// Uses peripheral_top for all I/O subsystems; sentinel_rv_security for crypto.
+module sentinel_rv_top #(
+    parameter [127:0] AUDIT_KEY = 128'h0123456789ABCDEF0123456789ABCDEF,
+    parameter SD_DETECT_ACTIVE_LOW = 1
+) (
     input wire clk_24mhz, input wire reset,
     input wire pmod_uart_rx, output wire pmod_uart_tx,
-    input wire esp_uart_rx, output wire esp_uart_tx,
     output wire adc_sck, output wire adc_mosi, input wire adc_miso, output wire adc_cs_n,
     output wire sd_clk, output wire sd_cmd, input wire sd_d0, output wire sd_cs_n, input wire sd_detect_n,
     output wire lcd_rs, output wire lcd_rw, output wire lcd_en, output wire [7:0] lcd_d,
     output wire [3:0] keypad_row_n, input wire [3:0] keypad_col_n, output wire [15:0] led,
     output wire buzzer, output wire seg_din, output wire seg_clk, output wire seg_load,
-    output wire relay_in, output wire motor_in1, output wire motor_in2, output wire [3:0] stepper,
+    output wire relay_in,
+
+    inout wire dht11_data,
+    input wire hc_sr04_echo,
+    output wire hc_sr04_trigger,
 
     input wire security_clear_alarm,
     input wire security_xadc_sample_valid,
@@ -35,6 +41,9 @@ module sentinel_rv_top (
     output wire security_audit_ready,
     output wire [127:0] security_audit_chain_head,
     output wire security_audit_storage_failed,
+    output wire security_sd_write_done,
+    output wire security_sd_write_error,
+    output wire security_sd_card_missing,
     output wire security_key_valid,
     output wire [7:0] security_key_ascii
 );
@@ -42,6 +51,9 @@ module sentinel_rv_top (
     wire core_adc_sample_valid;
     wire core_adc_channel;
     wire core_adc_force_sample;
+    wire [7:0] core_dht11_temp;
+    wire [7:0] core_dht11_hum;
+    wire [15:0] core_distance;
     wire core_key_valid;
     wire [7:0] core_key_ascii;
     wire core_command_valid;
@@ -67,21 +79,18 @@ module sentinel_rv_top (
     wire core_actuator_authorized;
     wire core_relay_set;
     wire core_relay_reset;
-    wire core_motor_enable;
-    wire [1:0] core_motor_command;
-    wire [7:0] core_motor_speed;
-    wire core_stepper_start;
-    wire core_stepper_direction;
-    wire [15:0] core_stepper_count;
-    wire [23:0] core_stepper_period;
     wire core_actuator_denied;
-    wire core_stepper_busy;
-    wire core_stepper_done;
-    wire core_audit_request;
-    wire core_audit_ready;
-    wire [127:0] core_audit_digest;
-    wire [127:0] core_audit_chain_head;
-    wire core_audit_storage_failed;
+    wire core_transport_error;
+    wire [7:0] core_transport_error_source_id;
+    wire core_audit_request_int;
+    wire core_audit_ready_int;
+    wire [127:0] core_audit_digest_int;
+
+    wire [127:0] core_audit_chain_head_int;
+    wire core_audit_storage_failed_int;
+    wire core_sd_write_done;
+    wire core_sd_write_error;
+    wire core_sd_card_missing;
     reg [7:0] last_opcode;
     reg [15:0] last_argument;
 
@@ -104,12 +113,6 @@ module sentinel_rv_top (
     assign core_actuator_authorized = security_command_accepted;
     assign core_relay_set = security_command_accepted && last_opcode == 8'h01;
     assign core_relay_reset = security_command_accepted && last_opcode == 8'h02;
-    assign core_motor_enable = security_command_accepted && last_opcode == 8'h03;
-    assign core_motor_command = last_argument[1:0];
-    assign core_motor_speed = last_argument[15:8];
-    assign core_stepper_start = security_command_accepted && last_opcode == 8'h04;
-    assign core_stepper_direction = last_argument[0];
-    assign core_stepper_count = last_argument;
     assign core_telemetry_valid = core_adc_sample_valid | security_command_accepted | security_command_rejected;
     assign core_telemetry_sequence = core_command_sequence;
     assign core_telemetry_event = security_alarm ? 8'hEE :
@@ -120,9 +123,12 @@ module sentinel_rv_top (
 
     assign security_key_valid = core_key_valid;
     assign security_key_ascii = core_key_ascii;
-    assign security_audit_ready = core_audit_ready;
-    assign security_audit_chain_head = core_audit_chain_head;
-    assign security_audit_storage_failed = core_audit_storage_failed;
+    assign security_audit_ready = core_audit_ready_int;
+    assign security_audit_chain_head = core_audit_chain_head_int;
+    assign security_audit_storage_failed = core_audit_storage_failed_int;
+    assign security_sd_write_done = core_sd_write_done;
+    assign security_sd_write_error = core_sd_write_error;
+    assign security_sd_card_missing = core_sd_card_missing;
 
     assign core_adc_channel = 1'b0;
     assign core_adc_force_sample = 1'b0;
@@ -131,22 +137,26 @@ module sentinel_rv_top (
     assign core_alarm = security_alarm;
     assign core_buzzer_enable = 1'b1;
     assign core_sevenseg_enable = 1'b1;
-    assign core_stepper_period = 24'd100_000;
-    assign core_audit_request = security_audit_request;
-    assign core_audit_digest = security_audit_digest;
+    assign core_audit_request_int = security_audit_request;
+    assign core_audit_digest_int = security_audit_digest;
 
-    team2_top peripherals (
+
+    peripheral_top #(
+        .SD_DETECT_ACTIVE_LOW(SD_DETECT_ACTIVE_LOW)
+    ) peripherals (
         .clk_24mhz(clk_24mhz), .reset(reset),
         .pmod_uart_rx(pmod_uart_rx), .pmod_uart_tx(pmod_uart_tx),
-        .esp_uart_rx(esp_uart_rx), .esp_uart_tx(esp_uart_tx),
+        .esp_uart_rx(1'b1), .esp_uart_tx(),
         .adc_sck(adc_sck), .adc_mosi(adc_mosi), .adc_miso(adc_miso), .adc_cs_n(adc_cs_n),
         .sd_clk(sd_clk), .sd_cmd(sd_cmd), .sd_d0(sd_d0), .sd_cs_n(sd_cs_n), .sd_detect_n(sd_detect_n),
         .lcd_rs(lcd_rs), .lcd_rw(lcd_rw), .lcd_en(lcd_en), .lcd_d(lcd_d),
         .keypad_row_n(keypad_row_n), .keypad_col_n(keypad_col_n),
         .led(led), .buzzer(buzzer), .seg_din(seg_din), .seg_clk(seg_clk), .seg_load(seg_load),
-        .relay_in(relay_in), .motor_in1(motor_in1), .motor_in2(motor_in2), .stepper(stepper),
+        .relay_in(relay_in),
+        .dht11_data(dht11_data), .hc_sr04_echo(hc_sr04_echo), .hc_sr04_trigger(hc_sr04_trigger),
         .core_adc_sample(core_adc_sample), .core_adc_sample_valid(core_adc_sample_valid),
         .core_adc_channel(core_adc_channel), .core_adc_force_sample(core_adc_force_sample),
+        .core_dht11_temp(core_dht11_temp), .core_dht11_hum(core_dht11_hum), .core_distance(core_distance),
         .core_key_valid(core_key_valid), .core_key_ascii(core_key_ascii),
         .core_command_valid(core_command_valid), .core_command_ready(core_command_ready),
         .core_command_opcode(core_command_opcode), .core_command_sequence(core_command_sequence),
@@ -158,15 +168,16 @@ module sentinel_rv_top (
         .core_led_status(core_led_status), .core_alarm(core_alarm), .core_buzzer_enable(core_buzzer_enable),
         .core_sevenseg_value(core_sevenseg_value), .core_sevenseg_enable(core_sevenseg_enable),
         .core_actuator_authorized(core_actuator_authorized), .core_relay_set(core_relay_set),
-        .core_relay_reset(core_relay_reset), .core_motor_enable(core_motor_enable),
-        .core_motor_command(core_motor_command), .core_motor_speed(core_motor_speed),
-        .core_stepper_start(core_stepper_start), .core_stepper_direction(core_stepper_direction),
-        .core_stepper_count(core_stepper_count), .core_stepper_period(core_stepper_period),
-        .core_actuator_denied(core_actuator_denied), .core_stepper_busy(core_stepper_busy),
-        .core_stepper_done(core_stepper_done),
-        .core_audit_request(core_audit_request), .core_audit_ready(core_audit_ready),
-        .core_audit_digest(core_audit_digest), .core_audit_chain_head(core_audit_chain_head),
-        .core_audit_storage_failed(core_audit_storage_failed)
+        .core_relay_reset(core_relay_reset), .core_actuator_denied(core_actuator_denied),
+        .core_transport_error(core_transport_error),
+        .core_transport_error_source_id(core_transport_error_source_id),
+        .core_audit_request(core_audit_request_int), .core_audit_ready(core_audit_ready_int),
+        .core_audit_digest(core_audit_digest_int),
+        .core_audit_chain_head(core_audit_chain_head_int),
+        .core_audit_storage_failed(core_audit_storage_failed_int),
+        .core_sd_write_done(core_sd_write_done),
+        .core_sd_write_error(core_sd_write_error),
+        .core_sd_card_missing(core_sd_card_missing)
     );
 
     sentinel_rv_security security_core (
