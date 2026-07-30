@@ -1,4 +1,4 @@
-# Hardware AES Security Engine: `es128_encrypt.v`
+# Hardware AES Security Engine: `aes128_encrypt.v`
 
 This directory contains the hardware-accelerated AES-128 block cipher encryption module.
 
@@ -6,7 +6,7 @@ This directory contains the hardware-accelerated AES-128 block cipher encryption
 
 ### 📌 Module Explanations:
 
-#### 1. `es128_encrypt.v`
+#### 1. `aes128_encrypt.v`
 * **What it is:** Hardware implementation of the Advanced Encryption Standard (AES) with a 128-bit key size.
 * **Why it is used:** Encrypts sensitive telemetry data and audit logs in hardware at clock-cycle speeds.
 * **Uses & Capabilities in Sentinel-RV:**

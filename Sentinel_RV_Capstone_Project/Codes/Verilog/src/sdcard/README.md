@@ -10,7 +10,7 @@ This directory contains the SPI SD card driver modules responsible for persisten
 * **What it is:** Master audit log coordinator State Machine.
 * **Why it is used:** Formats security events and sensor data into 512-byte sectors and schedules disk writes.
 
-#### 2. `udit_log_writer.v`
+#### 2. `udit_log_writer.v`
 * **What it is:** Event log entry formatter.
 * **Why it is used:** Formats timestamps, event codes, and sensor data into standardized log entries.
 

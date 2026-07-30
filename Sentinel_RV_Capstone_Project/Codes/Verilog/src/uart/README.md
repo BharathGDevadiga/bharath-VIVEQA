@@ -13,7 +13,7 @@ This directory contains full-duplex asynchronous serial UART communication drive
 #### 2. `uart_tx.v` & `uart_rx.v`
 * **What they are:** Asynchronous Serial Transmitter and Receiver modules with start/stop bit framing and parity checking.
 
-#### 3. `aud_gen.v`
+#### 3. `baud_gen.v`
 * **What it is:** Programmable baud rate generator.
 * **Why it is used:** Divides the system clock to generate standard serial clock ticks (e.g. 115,200 baud).
 

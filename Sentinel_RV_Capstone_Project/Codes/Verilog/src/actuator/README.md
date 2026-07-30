@@ -1,4 +1,4 @@
-# Actuator Subsystem: `relay_driver.v`
+# Actuator Subsystem: `rrelay_driver.v`
 
 This directory contains the physical actuator driver module responsible for executing output safety actions.
 
@@ -6,7 +6,7 @@ This directory contains the physical actuator driver module responsible for exec
 
 ### 📌 Module Explanations:
 
-#### 1. `relay_driver.v`
+#### 1. `rrelay_driver.v`
 * **What it is:** Electromechanical & Solid-State Relay driver module.
 * **Why it is used:** Controls physical relay switches to toggle external high-power loads or safety isolation circuits.
 * **Uses & Capabilities in Sentinel-RV:**

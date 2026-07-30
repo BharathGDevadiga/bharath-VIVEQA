@@ -16,6 +16,6 @@ This directory contains visual indicators and audible alarm driver modules.
 * **What it is:** System state LED controller.
 * **Why it is used:** Drives status LEDs to visually indicate system power, security arm/disarm status, and alarm conditions.
 
-#### 3. `uzzer_controller.v`
+#### 3. `buzzer_controller.v`
 * **What it is:** Pulse-Width Modulation (PWM) piezo buzzer driver.
 * **Why it is used:** Generates audible alert tones and alarm sirens during security trip conditions or keypress feedback.
