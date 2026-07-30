@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Thu Jul 30 15:22:47 2026
+# Process ID         : 26536
+# Current directory  : C:/VIVADO-proj1/New folder/Sentinel_RV-Project/Sentinel_RV-Project.runs/synth_1
+# Command line       : vivado.exe -log sentinel_rv_board_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source sentinel_rv_board_top.tcl
+# Log file           : C:/VIVADO-proj1/New folder/Sentinel_RV-Project/Sentinel_RV-Project.runs/synth_1/sentinel_rv_board_top.vds
+# Journal file       : C:/VIVADO-proj1/New folder/Sentinel_RV-Project/Sentinel_RV-Project.runs/synth_1\vivado.jou
+# Running On         : Vivobookbharath-G
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26220
+# Processor Detail   : AMD Ryzen 5 7520U with Radeon Graphics         
+# CPU Frequency      : 2795 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 16407 MB
+# Swap memory        : 11811 MB
+# Total Virtual      : 28218 MB
+# Available Virtual  : 2432 MB
+#-----------------------------------------------------------
+source sentinel_rv_board_top.tcl -notrace
