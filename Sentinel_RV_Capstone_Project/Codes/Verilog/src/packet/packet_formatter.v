@@ -44,19 +44,6 @@ module packet_formatter (
         .data_last(crc_data_last), .crc(crc_value), .busy(crc_busy), .crc_valid(crc_valid)
     );
 
-    function automatic [7:0] frame_byte;
-        input [4:0] index;
-        begin
-            if (index == 0)
-                frame_byte = 8'hA5;
-            else if (index <= 8)
-                frame_byte = nonce_reg >> (8 * (8 - index));
-            else if (index == 9)
-                frame_byte = sequence_reg;
-            else
-                frame_byte = cipher_reg >> (8 * (25 - index));
-        end
-    endfunction
 
     always @(posedge clk) begin
         if (reset) begin
@@ -108,7 +95,15 @@ module packet_formatter (
                         state <= CRC_SEND;
                     end
                     CRC_SEND: begin
-                        crc_data <= frame_byte(byte_index);
+                        if (byte_index == 0)
+                            crc_data <= 8'hA5;
+                        else if (byte_index <= 8)
+                            crc_data <= nonce_reg >> (8 * (8 - byte_index));
+                        else if (byte_index == 9)
+                            crc_data <= sequence_reg;
+                        else
+                            crc_data <= cipher_reg >> (8 * (25 - byte_index));
+                            
                         crc_data_valid <= 1'b1;
                         crc_data_last <= (byte_index == 5'd25);
                         if (byte_index == 5'd25)

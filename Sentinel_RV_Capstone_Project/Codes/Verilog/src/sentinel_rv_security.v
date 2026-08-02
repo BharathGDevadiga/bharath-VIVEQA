@@ -57,9 +57,10 @@ module sentinel_rv_security (
         .replay_check_start(replay_start), .command_accepted(command_accepted),
         .command_rejected(command_rejected), .alarm_latched(alarm), .aes_reset(aes_reset), .secure_state(secure_state)
     );
+    wire [63:0] formatter_nonce = (generated_nonce_valid && pending_nonce == 64'd0) ? generated_nonce : pending_nonce;
     packet_formatter formatter (
         .clk(clk), .reset(reset), .aes_reset(aes_reset), .start(formatter_start), .plaintext(pending_plaintext), .key(pending_key),
-        .nonce((generated_nonce_valid && pending_nonce == 64'd0) ? generated_nonce : pending_nonce), .sequence(pending_sequence), .packet(tx_packet), .packet_valid(tx_packet_valid), .busy(formatter_busy)
+        .nonce(formatter_nonce), .sequence(pending_sequence), .packet(tx_packet), .packet_valid(tx_packet_valid), .busy(formatter_busy)
     );
     nonce_generator nonce_source (
         .clk(clk), .reset(reset), .request(tx_start && !transmit_pending && tx_nonce == 64'd0),

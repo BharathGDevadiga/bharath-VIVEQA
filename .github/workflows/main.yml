@@ -25,7 +25,7 @@ jobs:
         working-directory: ./Sentinel_RV_Capstone_Project/Codes/Verilog/src
         run: |
           # Uses your existing PowerShell test script
-          .\tb\run_tests.ps1
+          ./tb/run_tests.ps1
 
   python-syntax-check:
     name: Check Python Syntax
