@@ -83,14 +83,14 @@ module tb_sentinel_rv_top;
 
     task send_command;
         input [7:0] opcode;
-        input [7:0] sequence;
+        input [7:0] seq_num;
         input [15:0] argument;
         reg [7:0] checksum;
         begin
-            checksum = 8'hA5 ^ opcode ^ sequence ^ argument[15:8] ^ argument[7:0];
+            checksum = 8'hA5 ^ opcode ^ seq_num ^ argument[15:8] ^ argument[7:0];
             send_uart_byte(8'hA5);
             send_uart_byte(opcode);
-            send_uart_byte(sequence);
+            send_uart_byte(seq_num);
             send_uart_byte(argument[15:8]);
             send_uart_byte(argument[7:0]);
             send_uart_byte(checksum);
