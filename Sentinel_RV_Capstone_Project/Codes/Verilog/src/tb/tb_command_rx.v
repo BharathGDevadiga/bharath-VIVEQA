@@ -4,7 +4,7 @@ module tb_command_rx;
     reg [7:0] rx_data = 0;
 
     wire cmd_valid, cmd_error;
-    wire [7:0] opcode, sequence;
+    wire [7:0] opcode, seq_num;
     wire [15:0] argument;
 
     // Instantiate DUT with named port connections (one per line for clarity)
@@ -16,7 +16,7 @@ module tb_command_rx;
         .cmd_valid(cmd_valid),
         .cmd_error(cmd_error),
         .cmd_opcode(opcode),
-        .cmd_sequence(sequence),
+        .cmd_sequence(seq_num),
         .cmd_argument(argument)
     );
 
@@ -45,7 +45,7 @@ module tb_command_rx;
         send(8'hDF);
 
         @(posedge clk); #1;
-        if (!cmd_valid || opcode != 8'h22 || sequence != 8'h09 || argument != 16'hBEEF)
+        if (!cmd_valid || opcode != 8'h22 || seq_num != 8'h09 || argument != 16'hBEEF)
             $display("FAIL: command parser");
         else
             $display("PASS: sentinel_command_rx");
