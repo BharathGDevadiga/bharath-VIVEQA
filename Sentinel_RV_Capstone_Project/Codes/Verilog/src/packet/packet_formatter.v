@@ -9,7 +9,7 @@ module packet_formatter (
     input  wire [127:0] plaintext,
     input  wire [127:0] key,
     input  wire [63:0]  nonce,
-    input  wire [7:0]   sequence,
+    input  wire [7:0]   seq_num,
     output reg  [239:0] packet,
     output reg          packet_valid,
     output reg          busy
@@ -75,7 +75,7 @@ module packet_formatter (
                 case (state)
                     IDLE: if (start) begin
                         nonce_reg <= nonce;
-                        sequence_reg <= sequence;
+                        sequence_reg <= seq_num;
                         plaintext_reg <= plaintext;
                         key_reg <= key;
                         busy <= 1'b1;
