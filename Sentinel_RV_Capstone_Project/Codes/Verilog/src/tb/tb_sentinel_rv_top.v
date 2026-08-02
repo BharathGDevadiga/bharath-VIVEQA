@@ -6,7 +6,6 @@ module tb_sentinel_rv_top;
     reg clk_24mhz;
     reg reset;
     reg pmod_uart_rx;
-    reg esp_uart_rx;
     reg adc_miso;
     reg sd_d0;
     reg sd_detect_n;
@@ -24,7 +23,6 @@ module tb_sentinel_rv_top;
     reg [127:0] security_audit_digest;
 
     wire pmod_uart_tx;
-    wire esp_uart_tx;
     wire adc_sck;
     wire adc_mosi;
     wire adc_cs_n;
@@ -102,7 +100,6 @@ module tb_sentinel_rv_top;
     sentinel_rv_top dut (
         .clk_24mhz(clk_24mhz), .reset(reset),
         .pmod_uart_rx(pmod_uart_rx), .pmod_uart_tx(pmod_uart_tx),
-        .esp_uart_rx(esp_uart_rx), .esp_uart_tx(esp_uart_tx),
         .adc_sck(adc_sck), .adc_mosi(adc_mosi), .adc_miso(adc_miso), .adc_cs_n(adc_cs_n),
         .sd_clk(sd_clk), .sd_cmd(sd_cmd), .sd_d0(sd_d0), .sd_cs_n(sd_cs_n), .sd_detect_n(sd_detect_n),
         .lcd_rs(lcd_rs), .lcd_rw(lcd_rw), .lcd_en(lcd_en), .lcd_d(lcd_d),
@@ -131,7 +128,6 @@ module tb_sentinel_rv_top;
         clk_24mhz = 1'b0;
         reset = 1'b1;
         pmod_uart_rx = 1'b1;
-        esp_uart_rx = 1'b1;
         adc_miso = 1'b0;
         sd_d0 = 1'b1;
         sd_detect_n = 1'b1;
