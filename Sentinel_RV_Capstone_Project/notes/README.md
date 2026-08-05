@@ -10,7 +10,7 @@ The system integrates an open-source 32-bit RISC-V soft processor core (`PicoRV3
 
 ## Hardware Architecture & System Dataflow
 
-​```
+```
 +--------------------+     +------------------------------+     +------------------+
 | 4x Slide Switches  |---->| sentinel_rv_board_top.v      |---->| 8x Status LEDs   |
 | (S1, S2, S4, S5)   |     +---------------+--------------+     | (L1 - L8)        |
@@ -55,33 +55,35 @@ The system integrates an open-source 32-bit RISC-V soft processor core (`PicoRV3
                           +-------------------------------+
 ```
 
+---
+
 ## Active Slide Switch & LED Map
 
 | Switch | FPGA Pin | Feature | Function When Switched UP (1) | Status LED |
 |--------|----------|---------|-------------------------------|------------|
-| S1 | C9 | System Reset | DOWN = Reset held; UP = System Runs | L1 (D5) 🟢 |
-| S2 | B9 | Alarm Clear | Clears latched security alarms and silences buzzer | L2 (A3) 🟢 |
-| S4 | A7 | Alarm Test | Manually sounds 2048 Hz piezo buzzer for hardware test | L4 (A4) 🟢 |
-| S5 | C7 | Relay Force | Manually energizes Form-C Safety Relay ON | L5 (E6) 🟢 |
+| S1 | C9 | System Reset | DOWN = Reset held; UP = System Runs | L1 (D5) |
+| S2 | B9 | Alarm Clear | Clears latched security alarms and silences buzzer | L2 (A3) |
+| S4 | A7 | Alarm Test | Manually sounds 2048 Hz piezo buzzer for hardware test | L4 (A4) |
+| S5 | C7 | Relay Force | Manually energizes Form-C Safety Relay ON | L5 (E6) |
 
 ---
 
-## LED Status Indicator Map (L1–L8)
+## LED Status Indicator Map (L1-L8)
 
-| LED | FPGA Pin | Colour | Meaning |
-|-----|----------|--------|---------|
-| **L1** | D5 | 🟢 Green | **System Power / Run** — ON when S1 is UP (system running) |
-| **L2** | A3 | 🟢 Green | **SD Card Detected** — ON when Micro-SD card is physically inserted |
-| **L3** | B4 | 🟡 Yellow | **SD Card Activity (RISC-V)** — Blinks during SD card read/write SPI transaction |
-| **L4** | A4 | 🔵 Blue | **RISC-V CPU Running** — ON when PicoRV32 processor is active (not trapped) |
-| **L5** | E6 | 🔴 Red | **Relay Status** — ON when Form-C Safety Relay is energized/closed |
-| **L6** | C13 | 🔴 Red | **Security Alarm Active** — ON when tamper/intrusion alarm is triggered |
-| **L7** | C14 | 🟢 Green | **Command Accepted** — ON when a valid AES-encrypted command is accepted |
-| **L8** | D14 | 🔴 Red | **Command Rejected** — ON when a replayed or invalid command is blocked |
+| LED | FPGA Pin | Meaning |
+|-----|----------|---------|
+| L1 | D5 | **System Power / Run** - ON when S1 is UP (system running) |
+| L2 | A3 | **SD Card Detected** - ON when Micro-SD card is physically inserted |
+| L3 | B4 | **SD Card Activity (RISC-V)** - Blinks during SD card read/write SPI transaction |
+| L4 | A4 | **RISC-V CPU Running** - ON when PicoRV32 processor is active (not trapped) |
+| L5 | E6 | **Relay Status** - ON when Form-C Safety Relay is energized/closed |
+| L6 | C13 | **Security Alarm Active** - ON when tamper/intrusion alarm is triggered |
+| L7 | C14 | **Command Accepted** - ON when a valid AES-encrypted command is accepted |
+| L8 | D14 | **Command Rejected** - ON when a replayed or invalid command is blocked |
 
 ---
 
-## 🗺️ Memory-Mapped I/O (MMIO) Address Space
+## Memory-Mapped I/O (MMIO) Address Space
 
 | Base Address Range | Subsystem / Register | Access | Description |
 |--------------------|----------------------|--------|-------------|
@@ -97,7 +99,7 @@ The system integrates an open-source 32-bit RISC-V soft processor core (`PicoRV3
 
 ---
 
-## 🛡️ Security Core & Cryptography Subsystem
+## Security Core & Cryptography Subsystem
 
 ### 1. Hardware AES-128 Encryption (`aes128_encrypt.v`)
 - Implements a 10-round AES-128 block cipher in pure hardware logic.
@@ -114,28 +116,26 @@ The system integrates an open-source 32-bit RISC-V soft processor core (`PicoRV3
 
 ---
 
-## 💾 SPI Micro-SD Card Audit Logging (`sd_logger.v`)
+## SPI Micro-SD Card Audit Logging (`sd_logger.v`)
 
-- **Storage Architecture:** Direct SPI mode communication (`sd_card_init.v`, `spi_sd_master.v`, `sd_sector_writer.v`).
+- **Storage Architecture:** Direct SPI mode (`sd_card_init.v`, `spi_sd_master.v`, `sd_sector_writer.v`).
 - **Sector Formatting:** Formats security logs into raw 512-byte physical disk sectors.
-- **Audit Record Structure:** Each sector record contains:
-  - **Header:** 4-byte signature (`0x53454E54` → `"SENT"`)
-  - **Sequence & Timestamp:** 32-bit monotonically increasing log sequence number.
+- **Audit Record Structure:**
+  - **Header:** 4-byte signature (`0x53454E54` -> `"SENT"`)
+  - **Sequence:** 32-bit monotonically increasing log sequence number.
   - **Sensor Payload:** Encrypted DHT11 temperature, humidity, analog voltage and security flags.
-  - **Cryptographic Hash Chain:** 128-bit hash linking the current log entry to the previous block.
+  - **Hash Chain:** 128-bit hash linking the current log entry to the previous block.
 
 ---
 
-## 🖥️ Desktop Software Integration
-
-The system communicates with Python desktop tools over **115200 baud serial UART**:
+## Desktop Software Integration
 
 ### 1. `App1_FPGA_Control_And_Sensors.py`
-- **Real-time Live Sensor Graphing:** Plots live charts for Temperature (°C), Humidity (%), and Analog Voltage (V).
-- **Security Event Monitor:** Displays live security alerts, command accepted/rejected events, and alarm status from the FPGA.
-- **Acoustic Burglar Alarm:** Plays a loud alarm siren sound on intrusion detection events received over UART.
+- **Real-time Live Sensor Graphing:** Plots live Temperature (degrees C), Humidity (%), and Analog Voltage (V).
+- **Security Event Monitor:** Displays live security alerts, command accepted/rejected events and alarm status.
+- **Acoustic Burglar Alarm:** Plays alarm siren on intrusion detection events received over UART.
 
 ### 2. `App2_SD_Card_Reader.py`
-- **Raw Physical Sector Inspection:** Reads physical disk sectors (`\\.\PhysicalDriveX`) directly from Micro-SD cards formatted by the FPGA.
-- **AES Decryption & Audit Trail Verification:** Decrypts 512-byte hardware AES audit log records and verifies timestamp sequence numbers.
+- **Raw Physical Sector Inspection:** Reads physical disk sectors (`\\.\PhysicalDriveX`) from Micro-SD cards formatted by the FPGA.
+- **AES Decryption & Audit Trail Verification:** Decrypts 512-byte hardware AES audit log records and verifies sequence numbers.
 - **Requires:** Elevated **Windows UAC Administrator** rights to access raw disk sectors.
