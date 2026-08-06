@@ -4,7 +4,7 @@ Synthesizable Verilog HDL design for the peripherals and security boundary surro
 
 ---
 
-## 🛡️ Security Boundary & Architecture
+## Security Boundary & Architecture
 
 The Peripheral Subsystem (`peripheral_top.v`) manages external hardware interfaces and enforces strict security boundaries:
 
@@ -17,7 +17,7 @@ The Peripheral Subsystem (`peripheral_top.v`) manages external hardware interfac
 
 ---
 
-## 📡 Serial Telemetry & Command Framing Protocol
+## Serial Telemetry & Command Framing Protocol
 
 * **UART Command Frame:** `0xA5` | `opcode` | `sequence` | `argument[15:8]` | `argument[7:0]` | `xor8`
 * **UART Telemetry Frame:** `0xA6` | `sequence` | `event` | `sensor[11:8]` | `sensor[7:0]` | `status` | `xor8`
@@ -26,7 +26,7 @@ The Peripheral Subsystem (`peripheral_top.v`) manages external hardware interfac
 
 ---
 
-## 📌 Board Hardware & Design Constraints
+## Board Hardware & Design Constraints
 
 * **Target Hardware:** AT-STLN-ARTIX7-001 Artix-7 FPGA (`xc7a35tftg256-1`).
 * **Constraints File:** `sentinel_rv.xdc` enforces 3.3V LVCMOS (`LVCMOS33`) IO standards:
@@ -37,7 +37,7 @@ The Peripheral Subsystem (`peripheral_top.v`) manages external hardware interfac
 
 ---
 
-## 🛠️ Vivado Synthesis & Implementation
+## Vivado Synthesis & Implementation
 
 This design is configured for full compilation within **AMD/Xilinx Vivado**:
 
