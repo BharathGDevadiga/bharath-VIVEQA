@@ -10,8 +10,6 @@ module peripheral_top #(
 
     input  wire         pmod_uart_rx,
     output wire         pmod_uart_tx,
-    input  wire         esp_uart_rx,
-    output wire         esp_uart_tx,
 
     output wire         adc_sck,
     output wire         adc_mosi,
@@ -23,22 +21,12 @@ module peripheral_top #(
     output wire         sd_cs_n,
     input  wire         sd_detect_n,
 
-    output wire         lcd_rs,
-    output wire         lcd_rw,
-    output wire         lcd_en,
-    output wire [7:0]   lcd_d,
-    output wire [3:0]   keypad_row_n,
-    input  wire [3:0]   keypad_col_n,
     output wire [15:0]  led,
     output wire         buzzer,
-    output wire         seg_din,
-    output wire         seg_clk,
-    output wire         seg_load,
     output wire         relay_in,
 
     inout  wire         dht11_data,
-    input  wire         hc_sr04_echo,
-    output wire         hc_sr04_trigger,
+
 
     output wire [11:0]  core_adc_sample,
     output wire         core_adc_sample_valid,
@@ -63,14 +51,9 @@ module peripheral_top #(
     input  wire [11:0]  core_telemetry_sensor,
     input  wire [7:0]   core_telemetry_status,
 
-    input  wire         core_lcd_refresh,
-    input  wire [127:0] core_lcd_line1,
-    input  wire [127:0] core_lcd_line2,
     input  wire [15:0]  core_led_status,
     input  wire         core_alarm,
     input  wire         core_buzzer_enable,
-    input  wire [15:0]  core_sevenseg_value,
-    input  wire         core_sevenseg_enable,
 
     input  wire         core_actuator_authorized,
     input  wire         core_relay_set,
@@ -91,25 +74,19 @@ module peripheral_top #(
     output wire         core_sd_write_error,
     output wire         core_sd_card_missing
 );
-    wire [7:0] pmod_rx_data, esp_rx_data;
-    wire pmod_rx_valid, esp_rx_valid, pmod_framing_error, esp_framing_error;
-    wire pmod_tx_start, esp_tx_start, pmod_tx_busy, esp_tx_busy;
-    wire [7:0] pmod_tx_data, esp_tx_data;
+    wire [7:0] pmod_rx_data;
+    wire pmod_rx_valid, pmod_framing_error;
+    wire pmod_tx_start, pmod_tx_busy;
+    wire [7:0] pmod_tx_data;
     wire pmod_cmd_valid, pmod_cmd_error;
     wire [7:0] pmod_cmd_opcode, pmod_cmd_sequence;
     wire [15:0] pmod_cmd_argument;
-    wire esp_message_valid, esp_message_error;
-    wire [7:0] esp_message_type;
-    wire [15:0] esp_message_value;
     wire telemetry_valid, telemetry_ready;
     wire [7:0] telemetry_sequence, telemetry_event, telemetry_status;
     wire [11:0] telemetry_sensor;
-    wire pmod_telemetry_ready, esp_telemetry_ready;
+    wire pmod_telemetry_ready;
 
-    wire lcd_write, lcd_write_rs, lcd_ready;
-    wire [7:0] lcd_write_data;
-    wire [3:0] keypad_code;
-    wire keypad_valid;
+
     wire relay_denied;
     wire audit_record_valid, audit_record_ready, logger_log_ready;
     wire [255:0] audit_record;
@@ -149,24 +126,10 @@ module peripheral_top #(
         .uart_start(pmod_tx_start), .uart_data(pmod_tx_data)
     );
 
-    assign esp_uart_tx = 1'b1;
-    assign esp_tx_busy = 1'b0;
-    assign esp_tx_start = 1'b0;
-    assign esp_tx_data = 8'd0;
-    assign esp_rx_data = 8'd0;
-    assign esp_rx_valid = 1'b0;
-    assign esp_framing_error = 1'b0;
-    assign esp_message_valid = 1'b0;
-    assign esp_message_type = 8'd0;
-    assign esp_message_value = 16'd0;
-    assign esp_message_error = 1'b0;
-    assign esp_telemetry_ready = 1'b1;
-
     peripheral_controller controller (
         .clk(clk_24mhz), .reset(reset), .pmod_cmd_valid(pmod_cmd_valid),
         .pmod_cmd_opcode(pmod_cmd_opcode), .pmod_cmd_sequence(pmod_cmd_sequence),
-        .pmod_cmd_argument(pmod_cmd_argument), .esp_cmd_valid(esp_message_valid),
-        .esp_cmd_type(esp_message_type), .esp_cmd_value(esp_message_value),
+        .pmod_cmd_argument(pmod_cmd_argument),
         .core_command_valid(core_command_valid), .core_command_ready(core_command_ready),
         .core_command_opcode(core_command_opcode), .core_command_sequence(core_command_sequence),
         .core_command_argument(core_command_argument), .core_command_source(core_command_source),
@@ -177,7 +140,7 @@ module peripheral_top #(
         .telemetry_sequence(telemetry_sequence), .telemetry_event(telemetry_event),
         .telemetry_sensor(telemetry_sensor), .telemetry_status(telemetry_status)
     );
-    assign telemetry_ready = pmod_telemetry_ready && esp_telemetry_ready;
+    assign telemetry_ready = pmod_telemetry_ready;
 
     mcp3202_sampler #(.CLK_HZ(CLK_HZ)) sampler (
         .clk(clk_24mhz), .reset(reset), .force_sample(core_adc_force_sample), .channel(core_adc_channel),
@@ -195,41 +158,19 @@ module peripheral_top #(
     assign core_dht11_temp = dht_temp;
     assign core_dht11_hum = dht_hum;
 
-    // Ultrasonic Sensor
-    hc_sr04_controller #(.CLK_HZ(CLK_HZ)) hc_sr04 (
-        .clk(clk_24mhz), .reset(reset), .trigger(hc_sr04_trigger), .echo(hc_sr04_echo),
-        .distance_cm(hc_dist), .valid(hc_valid)
-    );
-    assign core_distance = hc_dist;
+    assign core_distance = 16'd0;
 
-    lcd_controller lcd_text (
-        .clk(clk_24mhz), .reset(reset), .refresh(core_lcd_refresh), .line1(core_lcd_line1),
-        .line2(core_lcd_line2), .driver_write(lcd_write), .driver_rs(lcd_write_rs),
-        .driver_data(lcd_write_data), .driver_ready(lcd_ready)
-    );
-    lcd_driver #(.CLK_HZ(CLK_HZ)) lcd_bus (
-        .clk(clk_24mhz), .reset(reset), .write_en(lcd_write), .write_rs(lcd_write_rs),
-        .write_data(lcd_write_data), .ready(lcd_ready), .lcd_rs(lcd_rs), .lcd_rw(lcd_rw),
-        .lcd_en(lcd_en), .lcd_d(lcd_d)
-    );
-    keypad_scan #(.CLK_HZ(CLK_HZ)) keypad (
-        .clk(clk_24mhz), .reset(reset), .row_n(keypad_row_n), .col_n(keypad_col_n),
-        .key_valid(keypad_valid), .key_code(keypad_code)
-    );
-    keypad_decoder key_decode (
-        .clk(clk_24mhz), .reset(reset), .key_valid(keypad_valid), .key_code(keypad_code),
-        .ascii_valid(core_key_valid), .ascii(core_key_ascii)
-    );
+
+    assign core_key_valid = 1'b0;
+    assign core_key_ascii = 8'd0;
+    
     led_controller #(.CLK_HZ(CLK_HZ)) leds (
         .clk(clk_24mhz), .reset(reset), .status(core_led_status), .alarm(core_alarm), .led(led)
     );
     buzzer_controller #(.CLK_HZ(CLK_HZ)) sounder (
         .clk(clk_24mhz), .reset(reset), .alarm(core_alarm), .enable(core_buzzer_enable), .buzzer(buzzer)
     );
-    sevenseg_driver #(.CLK_HZ(CLK_HZ)) sevenseg (
-        .clk(clk_24mhz), .reset(reset), .value(core_sevenseg_value), .display_enable(core_sevenseg_enable),
-        .seg_din(seg_din), .seg_clk(seg_clk), .seg_load(seg_load)
-    );
+
 
     relay_driver relay (
         .clk(clk_24mhz), .reset(reset), .authorized(core_actuator_authorized),
@@ -238,8 +179,8 @@ module peripheral_top #(
 
 
     assign core_actuator_denied = relay_denied;
-    assign core_transport_error = pmod_cmd_error | esp_message_error;
-    assign core_transport_error_source_id = pmod_cmd_error ? 8'h01 : 8'h02;
+    assign core_transport_error = pmod_cmd_error;
+    assign core_transport_error_source_id = pmod_cmd_error ? 8'h01 : 8'h00;
 
     audit_log_writer audit (
         .clk(clk_24mhz), .reset(reset), .audit_request(core_audit_request), .audit_ready(core_audit_ready),
