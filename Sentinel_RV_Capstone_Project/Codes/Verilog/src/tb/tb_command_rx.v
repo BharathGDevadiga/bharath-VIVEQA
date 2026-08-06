@@ -44,7 +44,7 @@ module tb_command_rx;
         send(8'hEF);
         send(8'hDF);
 
-        @(posedge clk); #1;
+        #1;
         if (!cmd_valid || opcode != 8'h22 || seq_num != 8'h09 || argument != 16'hBEEF)
             $display("FAIL: command parser");
         else
