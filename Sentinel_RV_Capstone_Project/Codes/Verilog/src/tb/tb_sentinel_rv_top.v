@@ -9,7 +9,6 @@ module tb_sentinel_rv_top;
     reg adc_miso;
     reg sd_d0;
     reg sd_detect_n;
-    reg [3:0] keypad_col_n;
     reg security_clear_alarm;
     reg security_xadc_sample_valid;
     reg [11:0] security_xadc_vccint_code;
@@ -29,16 +28,8 @@ module tb_sentinel_rv_top;
     wire sd_clk;
     wire sd_cmd;
     wire sd_cs_n;
-    wire lcd_rs;
-    wire lcd_rw;
-    wire lcd_en;
-    wire [7:0] lcd_d;
-    wire [3:0] keypad_row_n;
     wire [15:0] led;
     wire buzzer;
-    wire seg_din;
-    wire seg_clk;
-    wire seg_load;
     wire relay_in;
     wire security_command_accepted;
     wire security_command_rejected;
@@ -102,9 +93,7 @@ module tb_sentinel_rv_top;
         .pmod_uart_rx(pmod_uart_rx), .pmod_uart_tx(pmod_uart_tx),
         .adc_sck(adc_sck), .adc_mosi(adc_mosi), .adc_miso(adc_miso), .adc_cs_n(adc_cs_n),
         .sd_clk(sd_clk), .sd_cmd(sd_cmd), .sd_d0(sd_d0), .sd_cs_n(sd_cs_n), .sd_detect_n(sd_detect_n),
-        .lcd_rs(lcd_rs), .lcd_rw(lcd_rw), .lcd_en(lcd_en), .lcd_d(lcd_d),
-        .keypad_row_n(keypad_row_n), .keypad_col_n(keypad_col_n),
-        .led(led), .buzzer(buzzer), .seg_din(seg_din), .seg_clk(seg_clk), .seg_load(seg_load),
+        .led(led), .buzzer(buzzer),
         .relay_in(relay_in),
         .security_clear_alarm(security_clear_alarm),
         .security_xadc_sample_valid(security_xadc_sample_valid),
@@ -131,7 +120,6 @@ module tb_sentinel_rv_top;
         adc_miso = 1'b0;
         sd_d0 = 1'b1;
         sd_detect_n = 1'b1;
-        keypad_col_n = 4'b1111;
         security_clear_alarm = 1'b0;
         security_xadc_sample_valid = 1'b0;
         security_xadc_vccint_code = 12'h550;
