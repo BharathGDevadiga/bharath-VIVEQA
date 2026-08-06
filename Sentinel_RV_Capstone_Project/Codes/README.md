@@ -10,6 +10,3 @@ Welcome to the **`Codes/`** directory of the **Sentinel-RV Capstone Project**. T
 * **[`Python/`](Python/)**: Contains the desktop GUI control applications.
   * **`App1_FPGA_Control_And_Sensors.py`**: Main control center for live sensor graphing and telemetry over UART.
   * **`App2_SD_Card_Reader.py`**: Audit log reader for decrypting security events stored on the physical SD card.
-
-> [!NOTE]
-> *For detailed technical information about specific hardware modules, please refer to the README documentation located inside their respective subdirectories.*
