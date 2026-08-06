@@ -5,6 +5,8 @@ module tb_sentinel_rv_top;
 
     reg clk_24mhz;
     reg reset;
+    reg manual_alarm_test;
+    reg sw_relay_force;
     reg pmod_uart_rx;
     reg adc_miso;
     reg sd_d0;
@@ -90,6 +92,8 @@ module tb_sentinel_rv_top;
 
     sentinel_rv_top dut (
         .clk_24mhz(clk_24mhz), .reset(reset),
+        .manual_alarm_test(manual_alarm_test),
+        .sw_relay_force(sw_relay_force),
         .pmod_uart_rx(pmod_uart_rx), .pmod_uart_tx(pmod_uart_tx),
         .adc_sck(adc_sck), .adc_mosi(adc_mosi), .adc_miso(adc_miso), .adc_cs_n(adc_cs_n),
         .sd_clk(sd_clk), .sd_cmd(sd_cmd), .sd_d0(sd_d0), .sd_cs_n(sd_cs_n), .sd_detect_n(sd_detect_n),
@@ -116,6 +120,8 @@ module tb_sentinel_rv_top;
     initial begin
         clk_24mhz = 1'b0;
         reset = 1'b1;
+        manual_alarm_test = 1'b0;
+        sw_relay_force = 1'b0;
         pmod_uart_rx = 1'b1;
         adc_miso = 1'b0;
         sd_d0 = 1'b1;
