@@ -36,6 +36,5 @@ This directory is organized into four distinct stages of the FPGA design flow, c
 * **`implementation_device.png`**: The final silicon die layout, highlighting exact physical routing and resource utilization (BRAMs and logic slices).
 * **`implementation_package.png`**: The final physical BGA package pinout showing exactly which pins the I/O ports (UART, Relay, SD Card, etc.) are constrained to.
 
-### 4. Simulation & Telemetry (`4_simulation/`)
+### 4. Simulation (`4_simulation/`)
 * **`simulation_waveforms.pdf`**: Icarus Verilog/Vivado behavioral simulation waveforms demonstrating the exact cycle-by-cycle execution of the security controller, anti-replay nonces, and AES encryption.
-* **`sensor_telemetry_log.csv`**: A recorded log of live, encrypted telemetry streaming data captured over the USB/UART interface at 115200 baud.
