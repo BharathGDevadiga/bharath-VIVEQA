@@ -17,12 +17,12 @@ This directory contains the 32-bit RISC-V hardware description code written in V
 * **`sentinel_rv_board_top.v`**
   * **What it is:** The top-level physical board wrapper module.
   * **Why it is used:** Connects physical FPGA I/O pins (clock, slide switches S1, S2, S4, S5, LEDs L1-L8, UART, sensors, relay, buzzer and SD card) to the internal SoC core.
-  * **Uses:** Handles board-level hardware initialization, pin multiplexing, XADC sampling, and 1-to-1 status LED illumination.
+  * **Uses:** Handles board-level hardware initialization, pin multiplexing, XADC sampling and 1-to-1 status LED illumination.
 
 * **`sentinel_rv_top.v`**
   * **What it is:** The central System-on-Chip integration wrapper.
   * **Why it is used:** Connects the RISC-V CPU core, Block RAM, security controller and peripheral drivers together over the MMIO bus.
-  * **Uses:** Coordinates system memory mapping, telemetry generation, and security signal routing.
+  * **Uses:** Coordinates system memory mapping, telemetry generation and security signal routing.
 
 * **`picorv32.v` and `picorv32_wrapper.v`**
   * **What it is:** A 32-bit RISC-V CPU core implementation.
@@ -94,7 +94,7 @@ This directory contains desktop graphical user interface tools built using Pytho
 * **`App1_FPGA_Control_And_Sensors.py`**
   * **What it is:** The main control center and live sensor graphing desktop app.
   * **Why it is used:** Connects to the FPGA via USB/UART at 115200 baud to receive encrypted telemetry and send control commands.
-  * **Uses:** Plots live temperature, humidity, and voltage charts. Displays security events and command status. Plays an acoustic alarm siren sound on intrusion detection.
+  * **Uses:** Plots live temperature, humidity and voltage charts. Displays security events and command status. Plays an acoustic alarm siren sound on intrusion detection.
 
 * **`App2_SD_Card_Reader.py`**
   * **What it is:** Micro-SD physical sector audit log reader.
