@@ -1,19 +1,14 @@
 `timescale 1ns/1ps
 
 module sentinel_rv_board_top #(
-    parameter integer SD_TEST_ENABLE = 1,
     parameter [127:0] AUDIT_KEY = 128'h000102030405060708090A0B0C0D0E0F,
     parameter integer SD_DETECT_ACTIVE_LOW = 1
 ) (
     input wire clk_24mhz,
-    input wire reset,              // S1 (C9) - Move DOWN for reset, UP to run
+    input wire reset_pin,          // S1 (C9) - Move DOWN for reset, UP to run
     input wire clear_alarm,        // S2 (B9) - Alarm Clear / Silence Buzzer
-    input wire sw_display_lock,    // S3 (G5) - Lock 7-Seg on Temperature
     input wire sw_alarm_test,      // S4 (A7) - Manual Alarm Test
     input wire sw_relay_force,     // S5 (C7) - Manual Relay Force ON
-    input wire sw_tamper_boost,    // S6 (A10) - Tamper Glitch Sensitivity Boost
-    input wire sw_sd_log_enable,   // S7 (B7) - SD Card Audit Log Enable
-    input wire sw_clock_heartbeat, // S8 (A8) - Master Clock Heartbeat Enable
     input wire pmod_uart_rx,
     output wire pmod_uart_tx,
     output wire adc_sck,
@@ -25,22 +20,12 @@ module sentinel_rv_board_top #(
     input wire sd_d0,
     output wire sd_cs_n,
     input wire sd_detect_n,
-    output wire lcd_rs,
-    output wire lcd_rw,
-    output wire lcd_en,
-    output wire [7:0] lcd_d,
-    output wire [3:0] keypad_row_n,
-    input wire [3:0] keypad_col_n,
-    output wire [7:0] led,         // L1 to L8 LEDs directly mapped to S1 to S8
+    output wire [7:0] led,         // L1 to L8 LEDs
     output wire buzzer,
-    output wire seg_din,
-    output wire seg_clk,
-    output wire seg_load,
     output wire relay_in,
-    inout wire dht11_data,
-    input wire hc_sr04_echo,
-    output wire hc_sr04_trigger
+    inout wire dht11_data
 );
+    wire reset = ~reset_pin;
     wire [15:0] led_internal;
     wire sd_storage_failed;
     wire sd_write_done;
@@ -48,39 +33,82 @@ module sentinel_rv_board_top #(
     wire sd_card_missing;
     reg sd_write_done_latched;
     reg sd_write_error_latched;
-    reg [24:0] sd_test_counter;
-    reg sd_test_fired;
-    reg sd_test_request;
 
-    localparam integer XADC_TICK_CYCLES = 24_000 - 1;  // 1 ms at 24 MHz
-    reg [14:0] xadc_tick_counter;
-    reg xadc_sample_tick;
 
-    localparam [11:0] XADC_VCCINT_STUB  = 12'h550;
-    localparam [11:0] XADC_TEMP_STUB    = 12'h500;
-    localparam integer SD_TEST_DELAY_CYCLES = 24_000_000 - 1;
+    // ---------------------------------------------------------------
+    // Real XADC primitive wires - reads actual on-chip voltage & temp
+    // ---------------------------------------------------------------
+    wire        xadc_eoc;          // End-of-conversion strobe (1 cycle pulse)
+    wire [15:0] xadc_do;           // XADC data output bus (16-bit, top 12 are data)
+    wire [6:0]  xadc_daddr;        // XADC address register to read (7-bit)
+    wire        xadc_den;          // XADC dynamic read enable
+    wire        xadc_drdy;         // XADC data ready
+    reg  [11:0] xadc_vccint_reg;   // Latched VCCINT reading (12-bit)
+    reg  [11:0] xadc_temp_reg;     // Latched temperature reading (12-bit)
+    reg         xadc_read_phase;   // 0 = reading VCCINT, 1 = reading Temp
+    reg         xadc_sample_valid_r;
+
+    // Xilinx XADC primitive - reads VCCINT (ch1) and Temperature (ch0)
+    // eoc fires every conversion; we read alternate channels each cycle.
+    XADC #(
+        .INIT_40(16'h9000), // Channel sequencer: continuous, ch0+ch1
+        .INIT_41(16'h2ef0), // Enable averaging x16 for stability
+        .INIT_42(16'h0400), // ADCCLK = DCLK/4 = 6 MHz
+        .INIT_48(16'h0301), // Sequencer: measure temp + VCCINT
+        .INIT_49(16'h0000)
+    ) xadc_inst (
+        .DCLK    (clk_24mhz),
+        .RESET   (reset),
+        .CONVST  (1'b0),
+        .CONVSTCLK(1'b0),
+        .VP      (1'b0),
+        .VN      (1'b0),
+        .VAUXP   (16'd0),
+        .VAUXN   (16'd0),
+        .ALM     (),
+        .OT      (),
+        .MUXADDR (),
+        .CHANNEL (),
+        .EOC     (xadc_eoc),
+        .EOS     (),
+        .BUSY    (),
+        .DRDY    (xadc_drdy),
+        .DO      (xadc_do),
+        .DADDR   (xadc_daddr),
+        .DEN     (xadc_den),
+        .DWE     (1'b0),
+        .DI      (16'd0),
+        .JTAGLOCKED(),
+        .JTAGMODIFIED(),
+        .JTAGBUSY()
+    );
+
+    // On each EOC, latch the reading and switch channel for next read
+    assign xadc_daddr = xadc_read_phase ? 7'h01 : 7'h00; // 0x00=Temp, 0x01=VCCINT
+    assign xadc_den   = xadc_eoc;
+
+    always @(posedge clk_24mhz) begin
+        xadc_sample_valid_r <= 1'b0;
+        if (reset) begin
+            xadc_vccint_reg    <= 12'h550;  // Safe default until first reading
+            xadc_temp_reg      <= 12'h500;  // Safe default until first reading
+            xadc_read_phase    <= 1'b0;
+        end else if (xadc_drdy) begin
+            if (xadc_read_phase)
+                xadc_vccint_reg <= xadc_do[15:4];  // VCCINT: top 12 bits
+            else begin
+                xadc_temp_reg   <= xadc_do[15:4];  // Temperature: top 12 bits
+                xadc_sample_valid_r <= 1'b1;        // Fire valid after both read
+            end
+            xadc_read_phase <= ~xadc_read_phase;
+        end
+    end
 
     always @(posedge clk_24mhz) begin
         if (reset) begin
-            sd_test_counter <= 25'd0;
-            sd_test_fired <= 1'b0;
-            sd_test_request <= 1'b0;
             sd_write_done_latched <= 1'b0;
             sd_write_error_latched <= 1'b0;
-        end else if (SD_TEST_ENABLE && !sd_test_fired) begin
-            sd_test_request <= 1'b0;
-            if (sd_write_done)
-                sd_write_done_latched <= 1'b1;
-            if (sd_write_error)
-                sd_write_error_latched <= 1'b1;
-            if (sd_test_counter == SD_TEST_DELAY_CYCLES) begin
-                sd_test_request <= 1'b1;
-                sd_test_fired <= 1'b1;
-            end else begin
-                sd_test_counter <= sd_test_counter + 1'b1;
-            end
         end else begin
-            sd_test_request <= 1'b0;
             if (sd_write_done)
                 sd_write_done_latched <= 1'b1;
             if (sd_write_error)
@@ -88,30 +116,24 @@ module sentinel_rv_board_top #(
         end
     end
 
-    always @(posedge clk_24mhz) begin
-        if (reset) begin
-            xadc_tick_counter <= 15'd0;
-            xadc_sample_tick  <= 1'b0;
-        end else begin
-            if (xadc_tick_counter == XADC_TICK_CYCLES[14:0]) begin
-                xadc_tick_counter <= 15'd0;
-                xadc_sample_tick  <= 1'b1;
-            end else begin
-                xadc_tick_counter <= xadc_tick_counter + 1'b1;
-                xadc_sample_tick  <= 1'b0;
-            end
-        end
-    end
 
-    // 1-to-1 Direct Mapping of LEDs L1-L8 above Switches S1-S8
-    assign led[0] = !reset;                                // L1 (D5) - Power / System Run
-    assign led[1] = clear_alarm | led_internal[1];         // L2 (A3) - Alarm Clear / ACK
-    assign led[2] = sw_display_lock;                       // L3 (B4) - Display Lock
-    assign led[3] = sw_alarm_test | led_internal[4];       // L4 (A4) - Alarm Test / Alarm
-    assign led[4] = relay_in;                              // L5 (E6) - Relay Status (ON/OFF)
-    assign led[5] = led_internal[5];                       // L6 (C13) - CPU Heartbeat
-    assign led[6] = sd_write_done_latched | sw_sd_log_enable;// L7 (C14) - SD Log Active
-    assign led[7] = 1'b1;                                  // L8 (D14) - 24 MHz Master Clock Active
+    wire core_buzzer;
+    wire core_relay;
+    wire core_cpu_trap;
+
+    // 1-to-1 Mapping of LEDs L1-L8
+    // Note: LEDs on this board are ACTIVE LOW (0 = ON). 
+    assign led[0] = ~(reset_pin);                               // L1 (D5) - Power / System Run (ON when switch UP)
+    assign led[1] = sd_detect_n;                                // L2 (A3) - SD Card Detect (ON when card inserted, sd_detect_n=0)
+    assign led[2] = sd_cs_n;                                    // L3 (B4) - SD Card Reading/Writing Activity (ON when CS=0)
+    assign led[3] = core_cpu_trap;                              // L4 (A4) - "CPU ON" (ON when CPU is NOT trapped)
+    assign led[4] = ~(relay_in);                                // L5 (E6) - Relay Status (ON when relay is active)
+    assign led[5] = ~(led_internal[3]);                         // L6 (C13) - Security Alarm Active
+    assign led[6] = ~(led_internal[1]);                         // L7 (C14) - Security Command Accepted
+    assign led[7] = ~(led_internal[2]);                         // L8 (D14) - Security Command Rejected
+
+    assign buzzer = core_buzzer;
+    assign relay_in = core_relay | sw_relay_force;
 
     sentinel_rv_top #(
         .AUDIT_KEY(AUDIT_KEY),
@@ -121,22 +143,22 @@ module sentinel_rv_board_top #(
         .pmod_uart_rx(pmod_uart_rx), .pmod_uart_tx(pmod_uart_tx),
         .adc_sck(adc_sck), .adc_mosi(adc_mosi), .adc_miso(adc_miso), .adc_cs_n(adc_cs_n),
         .sd_clk(sd_clk), .sd_cmd(sd_cmd), .sd_d0(sd_d0), .sd_cs_n(sd_cs_n), .sd_detect_n(sd_detect_n),
-        .lcd_rs(lcd_rs), .lcd_rw(lcd_rw), .lcd_en(lcd_en), .lcd_d(lcd_d),
-        .keypad_row_n(keypad_row_n), .keypad_col_n(keypad_col_n), .led(led_internal),
-        .buzzer(buzzer), .seg_din(seg_din), .seg_clk(seg_clk), .seg_load(seg_load),
-        .relay_in(relay_in),
-        .dht11_data(dht11_data), .hc_sr04_echo(hc_sr04_echo), .hc_sr04_trigger(hc_sr04_trigger),
-        .security_clear_alarm(clear_alarm | sw_alarm_test),
-        .security_xadc_sample_valid(xadc_sample_tick),
-        .security_xadc_vccint_code(XADC_VCCINT_STUB),
-        .security_xadc_temperature_code(XADC_TEMP_STUB),
+        .led(led_internal),
+        .buzzer(core_buzzer),
+        .relay_in(core_relay),
+        .dht11_data(dht11_data),
+        .security_clear_alarm(clear_alarm),
+        .manual_alarm_test(sw_alarm_test),
+        .security_xadc_sample_valid(xadc_sample_valid_r),
+        .security_xadc_vccint_code(xadc_vccint_reg),
+        .security_xadc_temperature_code(xadc_temp_reg),
         .security_command_accepted(), .security_command_rejected(),
         .security_alarm(), .security_aes_reset(),
         .security_tx_start(1'b0), .security_tx_plaintext(128'd0),
         .security_tx_key(128'd0), .security_tx_nonce(64'd0),
         .security_tx_sequence(8'd0), .security_tx_packet(),
-        .security_tx_packet_valid(), .security_tx_busy(), .security_cpu_trap(),
-        .security_audit_request(sd_test_request),
+        .security_tx_packet_valid(), .security_tx_busy(), .security_cpu_trap(core_cpu_trap),
+        .security_audit_request(1'b0),
         .security_audit_digest(128'h112233445566778899AABBCCDDEEFF00),
         .security_audit_ready(), .security_audit_chain_head(),
         .security_audit_storage_failed(sd_storage_failed),

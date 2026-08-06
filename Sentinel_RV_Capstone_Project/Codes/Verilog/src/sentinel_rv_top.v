@@ -10,16 +10,14 @@ module sentinel_rv_top #(
     input wire pmod_uart_rx, output wire pmod_uart_tx,
     output wire adc_sck, output wire adc_mosi, input wire adc_miso, output wire adc_cs_n,
     output wire sd_clk, output wire sd_cmd, input wire sd_d0, output wire sd_cs_n, input wire sd_detect_n,
-    output wire lcd_rs, output wire lcd_rw, output wire lcd_en, output wire [7:0] lcd_d,
-    output wire [3:0] keypad_row_n, input wire [3:0] keypad_col_n, output wire [15:0] led,
-    output wire buzzer, output wire seg_din, output wire seg_clk, output wire seg_load,
+    output wire [15:0] led,
+    output wire buzzer,
     output wire relay_in,
 
     inout wire dht11_data,
-    input wire hc_sr04_echo,
-    output wire hc_sr04_trigger,
 
     input wire security_clear_alarm,
+    input wire manual_alarm_test,
     input wire security_xadc_sample_valid,
     input wire [11:0] security_xadc_vccint_code,
     input wire [11:0] security_xadc_temperature_code,
@@ -68,14 +66,9 @@ module sentinel_rv_top #(
     wire [7:0] core_telemetry_event;
     wire [11:0] core_telemetry_sensor;
     wire [7:0] core_telemetry_status;
-    wire core_lcd_refresh;
-    wire [127:0] core_lcd_line1;
-    wire [127:0] core_lcd_line2;
     wire [15:0] core_led_status;
     wire core_alarm;
     wire core_buzzer_enable;
-    wire [15:0] core_sevenseg_value;
-    wire core_sevenseg_enable;
     wire core_actuator_authorized;
     wire core_relay_set;
     wire core_relay_reset;
@@ -104,12 +97,8 @@ module sentinel_rv_top #(
         end
     end
 
-    assign core_lcd_line1 = security_alarm ? "SECURITY ALARM  " : "SENTINEL-RV OK  ";
-    assign core_lcd_line2 = security_command_accepted ? "CMD ACCEPTED    " :
-                            security_command_rejected ? "CMD REJECTED    " : "READY           ";
     assign core_led_status = {12'd0, security_alarm, security_command_rejected,
                               security_command_accepted, core_command_valid};
-    assign core_sevenseg_value = last_argument;
     assign core_actuator_authorized = security_command_accepted;
     assign core_relay_set = security_command_accepted && last_opcode == 8'h01;
     assign core_relay_reset = security_command_accepted && last_opcode == 8'h02;
@@ -133,10 +122,8 @@ module sentinel_rv_top #(
     assign core_adc_channel = 1'b0;
     assign core_adc_force_sample = 1'b0;
     assign core_command_ready = 1'b1;
-    assign core_lcd_refresh = core_telemetry_valid | security_command_accepted | security_command_rejected;
-    assign core_alarm = security_alarm;
+    assign core_alarm = security_alarm | manual_alarm_test;
     assign core_buzzer_enable = 1'b1;
-    assign core_sevenseg_enable = 1'b1;
     assign core_audit_request_int = security_audit_request;
     assign core_audit_digest_int = security_audit_digest;
 
@@ -146,14 +133,11 @@ module sentinel_rv_top #(
     ) peripherals (
         .clk_24mhz(clk_24mhz), .reset(reset),
         .pmod_uart_rx(pmod_uart_rx), .pmod_uart_tx(pmod_uart_tx),
-        .esp_uart_rx(1'b1), .esp_uart_tx(),
         .adc_sck(adc_sck), .adc_mosi(adc_mosi), .adc_miso(adc_miso), .adc_cs_n(adc_cs_n),
         .sd_clk(sd_clk), .sd_cmd(sd_cmd), .sd_d0(sd_d0), .sd_cs_n(sd_cs_n), .sd_detect_n(sd_detect_n),
-        .lcd_rs(lcd_rs), .lcd_rw(lcd_rw), .lcd_en(lcd_en), .lcd_d(lcd_d),
-        .keypad_row_n(keypad_row_n), .keypad_col_n(keypad_col_n),
-        .led(led), .buzzer(buzzer), .seg_din(seg_din), .seg_clk(seg_clk), .seg_load(seg_load),
+        .led(led), .buzzer(buzzer),
         .relay_in(relay_in),
-        .dht11_data(dht11_data), .hc_sr04_echo(hc_sr04_echo), .hc_sr04_trigger(hc_sr04_trigger),
+        .dht11_data(dht11_data),
         .core_adc_sample(core_adc_sample), .core_adc_sample_valid(core_adc_sample_valid),
         .core_adc_channel(core_adc_channel), .core_adc_force_sample(core_adc_force_sample),
         .core_dht11_temp(core_dht11_temp), .core_dht11_hum(core_dht11_hum), .core_distance(core_distance),
@@ -164,9 +148,7 @@ module sentinel_rv_top #(
         .core_telemetry_valid(core_telemetry_valid), .core_telemetry_ready(core_telemetry_ready),
         .core_telemetry_sequence(core_telemetry_sequence), .core_telemetry_event(core_telemetry_event),
         .core_telemetry_sensor(core_telemetry_sensor), .core_telemetry_status(core_telemetry_status),
-        .core_lcd_refresh(core_lcd_refresh), .core_lcd_line1(core_lcd_line1), .core_lcd_line2(core_lcd_line2),
         .core_led_status(core_led_status), .core_alarm(core_alarm), .core_buzzer_enable(core_buzzer_enable),
-        .core_sevenseg_value(core_sevenseg_value), .core_sevenseg_enable(core_sevenseg_enable),
         .core_actuator_authorized(core_actuator_authorized), .core_relay_set(core_relay_set),
         .core_relay_reset(core_relay_reset), .core_actuator_denied(core_actuator_denied),
         .core_transport_error(core_transport_error),
