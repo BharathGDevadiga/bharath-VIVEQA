@@ -17,8 +17,10 @@ module mcp3202_sampler #(
     input  wire       spi_miso,
     output wire       adc_cs_n
 );
+    
     localparam integer SAMPLE_DIV = (CLK_HZ / SAMPLE_HZ > 0) ? (CLK_HZ / SAMPLE_HZ) : 1;
     localparam integer COUNT_W = (SAMPLE_DIV <= 1) ? 1 : $clog2(SAMPLE_DIV);
+    
     reg [COUNT_W-1:0] sample_count;
     reg start;
     reg [23:0] command_word;
@@ -38,20 +40,25 @@ module mcp3202_sampler #(
             command_word <= 24'd0;
             sample_value <= 12'd0;
             sample_valid <= 1'b0;
+            
         end else begin
             start <= 1'b0;
             sample_valid <= 1'b0;
             if (spi_done) begin
+                
                 sample_value <= received_word[11:0];
                 sample_valid <= 1'b1;
             end
             if (!busy) begin
+                
                 if (force_sample || sample_count == SAMPLE_DIV - 1) begin
+                    
                     sample_count <= {COUNT_W{1'b0}};
                     // MCP3202 command: start, single-ended, channel, MSB-first.
                     command_word <= channel ? 24'b00000111_00000000_00000000 :
                                               24'b00000110_00000000_00000000;
                     start <= 1'b1;
+                    
                 end else
                     sample_count <= sample_count + 1'b1;
             end
