@@ -4,21 +4,21 @@ This directory contains critical timing reports, hardware visualizations, and si
 
 ---
 
-## 📊 Performance Summary
+## Performance Summary
 
 * **Target Device:** Xilinx Artix-7 `XC7A35T-FTG256-1`
 * **Top Module:** `sentinel_rv_board_top`
 * **Clock Target:** 24.00 MHz (41.667 ns period)
 
-### ⏱️ Timing (Post-Implementation)
+### Timing (Post-Implementation)
 
 | Metric | Result | Status |
 |---|---|---|
-| **Worst Negative Slack (WNS)** | **+34.327 ns** | ✅ Met with large margin |
-| **Total Negative Slack (TNS)** | 0 ns | ✅ Passed |
-| **Number of Failing Endpoints** | 0 / 1407 | ✅ All passing |
+| **Worst Negative Slack (WNS)** | **+34.327 ns** |  Met with large margin |
+| **Total Negative Slack (TNS)** | 0 ns |  Passed |
+| **Number of Failing Endpoints** | 0 / 1407 |  All passing |
 
-### ⚡ Power & Utilization (Post-Implementation)
+### Power & Utilization (Post-Implementation)
 
 | Resource | Utilization | On-Chip Power |
 |---|---|---|
@@ -28,18 +28,18 @@ This directory contains critical timing reports, hardware visualizations, and si
 | I/O | 16% | Effective θJA: 4.9 °C/W |
 | BUFG | 3% | — |
 
-### ✅ Verification Status
+### Verification Status
 
 | Stage | Status | Notes |
 |---|---|---|
-| **Synthesis** | ✅ Complete | 67 timing warnings (no errors) |
-| **Implementation** | ✅ Complete | No errors or warnings |
-| **DRC Check** | ✅ Passed | No DRC violations found |
-| **Bitstream** | ✅ Generated | `write_bitstream` complete |
+| **Synthesis** |  Complete | 67 timing warnings (no errors) |
+| **Implementation** |  Complete | No errors or warnings |
+| **DRC Check** |  Passed | No DRC violations found |
+| **Bitstream** | Generated | `write_bitstream` complete |
 
 ---
 
-## 📂 Visual Artifacts Directory Map
+## Visual Artifacts Directory Map
 
 Please see the individual folders below for the visual documentation:
 
