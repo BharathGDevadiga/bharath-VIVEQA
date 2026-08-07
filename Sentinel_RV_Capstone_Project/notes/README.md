@@ -10,49 +10,48 @@ The system integrates an open-source 32-bit RISC-V soft processor core (`PicoRV3
 
 ## Hardware Architecture & System Dataflow
 
-```
-+--------------------+     +------------------------------+     +------------------+
-| 4x Slide Switches  |---->| sentinel_rv_board_top.v      |---->| 8x Status LEDs   |
-| (S1, S2, S4, S5)   |     +---------------+--------------+     | (L1 - L8)        |
-+--------------------+                     |                    +------------------+
-                                            v
-                          +----------------+---------------+
-                          |   sentinel_rv_top.v (SoC)     |
-                          |                               |
-                          | +-----------+  +-----------+  |
-                          | |PicoRV32   |  | Security  |  |
-                          | |RISC-V CPU |  |Controller |  |
-                          | +-----+-----+  +-----+-----+  |
-                          |       |              |         |
-                          | +-----+-----+  +-----+-----+  |
-                          | |MMIO Bridge|  |AES-128    |  |
-                          | +-----------+  |Encrypt    |  |
-                          |               +-----------+  |
-                          +----------------+--------------+
-                                           |
-                          +----------------+--------------+
-                          |  peripheral_top.v             |
-                          |                               |
-                          | +--------+  +--------+        |
-                          | |DHT11   |  |MCP3202 |        |
-                          | |Sensor  |  |ADC SPI |        |
-                          | +--------+  +--------+        |
-                          |                               |
-                          | +--------+  +--------+        |
-                          | |XADC    |  |Piezo   |        |
-                          | |Monitor |  |Buzzer  |        |
-                          | +--------+  +--------+        |
-                          |                               |
-                          | +--------+  +--------+        |
-                          | |Relay   |  |UART    |        |
-                          | |Driver  |  |115200  |        |
-                          | +--------+  +--------+        |
-                          |                               |
-                          | +--------+  +--------+        |
-                          | |SD Audit|  |SD Sector|       |
-                          | |Logger  |  |Writer  |        |
-                          | +--------+  +--------+        |
-                          +-------------------------------+
+```mermaid
+graph TD
+    classDef top fill:#0d1117,stroke:#8b949e,stroke-width:2px,color:#c9d1d9
+    classDef soc fill:#1f2937,stroke:#60a5fa,stroke-width:2px,color:#f3f4f6
+    classDef periph fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#ecfdf5
+    classDef ext fill:#4b5563,stroke:#9ca3af,stroke-width:2px,color:#f9fafb
+
+    Switches["4x Slide Switches<br>(S1, S2, S4, S5)"]:::ext
+    LEDs["8x Status LEDs<br>(L1 - L8)"]:::ext
+
+    subgraph Board["sentinel_rv_board_top.v"]
+        direction TB
+        
+        subgraph SoC["sentinel_rv_top.v (SoC)"]
+            direction TB
+            CPU["PicoRV32 RISC-V CPU"]:::soc
+            MMIO["MMIO Bridge"]:::soc
+            SecCtrl["Security Controller"]:::soc
+            AES["AES-128 Encrypt"]:::soc
+            
+            CPU --- MMIO
+            CPU --- SecCtrl
+            SecCtrl --- AES
+        end
+        
+        subgraph Peripheral["peripheral_top.v"]
+            direction LR
+            DHT["DHT11 Sensor"]:::periph
+            ADC["MCP3202 ADC SPI"]:::periph
+            XADC["XADC Monitor"]:::periph
+            Buzz["Piezo Buzzer"]:::periph
+            Relay["Relay Driver"]:::periph
+            UART["UART 115200"]:::periph
+            SDLog["SD Audit Logger"]:::periph
+            SDWrite["SD Sector Writer"]:::periph
+        end
+        
+        SoC <--> Peripheral
+    end
+
+    Switches --> Board
+    Board --> LEDs
 ```
 
 ---
