@@ -44,8 +44,13 @@ module tb_sentinel_rv_top;
     wire security_audit_ready;
     wire [127:0] security_audit_chain_head;
     wire security_audit_storage_failed;
+    wire security_sd_write_done;
+    wire security_sd_write_error;
+    wire security_sd_card_missing;
     wire security_key_valid;
     wire [7:0] security_key_ascii;
+
+    wire dht11_data;
 
     reg accepted_seen;
     reg rejected_seen;
@@ -92,12 +97,13 @@ module tb_sentinel_rv_top;
 
     sentinel_rv_top dut (
         .clk_24mhz(clk_24mhz), .reset(reset),
-        .manual_alarm_test(manual_alarm_test),
         .pmod_uart_rx(pmod_uart_rx), .pmod_uart_tx(pmod_uart_tx),
         .adc_sck(adc_sck), .adc_mosi(adc_mosi), .adc_miso(adc_miso), .adc_cs_n(adc_cs_n),
         .sd_clk(sd_clk), .sd_cmd(sd_cmd), .sd_d0(sd_d0), .sd_cs_n(sd_cs_n), .sd_detect_n(sd_detect_n),
         .led(led), .buzzer(buzzer),
         .relay_in(relay_in),
+        .manual_alarm_test(manual_alarm_test),
+        .dht11_data(dht11_data),
         .security_clear_alarm(security_clear_alarm),
         .security_xadc_sample_valid(security_xadc_sample_valid),
         .security_xadc_vccint_code(security_xadc_vccint_code),
@@ -113,6 +119,9 @@ module tb_sentinel_rv_top;
         .security_audit_request(security_audit_request), .security_audit_digest(security_audit_digest),
         .security_audit_ready(security_audit_ready), .security_audit_chain_head(security_audit_chain_head),
         .security_audit_storage_failed(security_audit_storage_failed),
+        .security_sd_write_done(security_sd_write_done),
+        .security_sd_write_error(security_sd_write_error),
+        .security_sd_card_missing(security_sd_card_missing),
         .security_key_valid(security_key_valid), .security_key_ascii(security_key_ascii)
     );
 
