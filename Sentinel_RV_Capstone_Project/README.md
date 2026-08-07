@@ -9,7 +9,53 @@ Welcome to the **Sentinel-RV Capstone Project** repository. This project impleme
 
 ## 🗂️ System Architecture & Project Structure
 
-The project is organized into structured directories for hardware description code, simulation and software applications:
+```mermaid
+graph TD
+    classDef core fill:#1f2937,stroke:#60a5fa,stroke-width:2px,color:#f3f4f6
+    classDef sec fill:#7f1d1d,stroke:#f87171,stroke-width:2px,color:#fee2e2
+    classDef periph fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#ecfdf5
+    classDef ext fill:#4b5563,stroke:#9ca3af,stroke-width:2px,color:#f9fafb
+
+    subgraph SoC["Sentinel-RV System-on-Chip (Artix-7 FPGA)"]
+        direction TB
+        
+        subgraph Security["Hardware Security Boundary (sentinel_rv_security.v)"]
+            CPU["PicoRV32 RISC-V CPU"]:::core
+            AES["AES-128 Crypto Engine"]:::sec
+            Replay["Anti-Replay Nonce Gen"]:::sec
+            SDLog["Hardware Audit Logger"]:::sec
+            
+            CPU <--> AES
+            CPU --> Replay
+            CPU --> SDLog
+        end
+        
+        subgraph Peripheral["Peripheral Subsystem (peripheral_top.v)"]
+            UART["UART Controller"]:::periph
+            XADC["Internal XADC"]:::periph
+            SPI["MCP3202 SPI Master"]:::periph
+            DHT["DHT11 Controller"]:::periph
+            GPIO["Relay & Alarm Driver"]:::periph
+        end
+        
+        Security <-->|Decrypted Commands & Telemetry| Peripheral
+    end
+
+    %% External Components
+    Host["💻 Python Control Center"]:::ext
+    SDCard["💾 Micro-SD Card"]:::ext
+    Analog["🌡️ External Sensors"]:::ext
+    Hardware["⚡ Safety Actuators"]:::ext
+
+    %% External Connections
+    UART <-->|Encrypted UART Packets| Host
+    SDLog -->|SPI Data| SDCard
+    SPI --> Analog
+    DHT --> Analog
+    GPIO --> Hardware
+```
+
+### Directory Structure
 
 ```
 Sentinel_RV_Capstone_Project/
