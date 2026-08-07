@@ -93,7 +93,6 @@ module tb_sentinel_rv_top;
     sentinel_rv_top dut (
         .clk_24mhz(clk_24mhz), .reset(reset),
         .manual_alarm_test(manual_alarm_test),
-        .sw_relay_force(sw_relay_force),
         .pmod_uart_rx(pmod_uart_rx), .pmod_uart_tx(pmod_uart_tx),
         .adc_sck(adc_sck), .adc_mosi(adc_mosi), .adc_miso(adc_miso), .adc_cs_n(adc_cs_n),
         .sd_clk(sd_clk), .sd_cmd(sd_cmd), .sd_d0(sd_d0), .sd_cs_n(sd_cs_n), .sd_detect_n(sd_detect_n),
