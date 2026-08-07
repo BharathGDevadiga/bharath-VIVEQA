@@ -1,10 +1,13 @@
-# Sentinel-RV Capstone Project: RISC-V Hardware Security & Telemetry System
+# 🛡️ Sentinel-RV Capstone Project: RISC-V Hardware Security & Telemetry System
 
 Welcome to the **Sentinel-RV Capstone Project** repository. This project implements a secure, FPGA-based System-on-Chip (SoC) powered by an open-source 32-bit RISC-V processor (PicoRV32), hardware-accelerated AES-128 encryption, anti-replay security controllers, multi-sensor telemetry collection and desktop GUI monitoring applications.
 
+> **Why "Sentinel-RV"?**
+> *Sentinel* — a guard whose role is to stand watch and protect — reflects the core purpose of this system: enforcing hardware security boundaries, detecting tamper events and protecting actuator access through AES-128 encryption. *RV* refers to the **RISC-V** open-source instruction set architecture powering the embedded PicoRV32 CPU at the heart of the SoC.
+
 ---
 
-## System Architecture & Project Structure
+## 🗂️ System Architecture & Project Structure
 
 The project is organized into structured directories for hardware description code, simulation and software applications:
 
@@ -23,7 +26,7 @@ Sentinel_RV_Capstone_Project/
 
 ---
 
-## Key Features & Hardware Capabilities
+## 🔑 Key Features & Hardware Capabilities
 
 - **32-Bit RISC-V CPU Core (PicoRV32):** Executes embedded firmware instructions to manage memory-mapped I/O peripherals and process security policies.
 - **Hardware AES-128 Encryption Engine (`aes128_encrypt.v`):** Encrypts sensor data streams and Micro-SD audit logs in hardware.
@@ -34,7 +37,7 @@ Sentinel_RV_Capstone_Project/
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### 1. Opening the Project in Xilinx Vivado
 
