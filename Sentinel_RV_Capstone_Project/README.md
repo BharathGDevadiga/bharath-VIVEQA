@@ -5,6 +5,10 @@ Welcome to the **Sentinel-RV Capstone Project** repository. This project impleme
 > **Why "Sentinel-RV"?**
 > *Sentinel* — a guard whose role is to stand watch and protect — reflects the core purpose of this system: enforcing hardware security boundaries, detecting tamper events and protecting actuator access through AES-128 encryption. *RV* refers to the **RISC-V** open-source instruction set architecture powering the embedded PicoRV32 CPU at the heart of the SoC.
 
+### 🎥 Hardware Demonstration Video
+**[▶ Watch the Live Board Demonstration](https://github.com/BharathGDevadiga/bharath-VIVEQA/releases/tag/v1.0-capstone)**  
+*(The complete 1080p demonstration video is attached to the v1.0 Capstone Release)*
+
 ---
 
 ## 🗂️ System Architecture & Project Structure
